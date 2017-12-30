@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2017 Jin Kwon &lt;onacit at gmail.com&gt;.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<!--
+http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd'
+http://xmlns.jcp.org/xml/ns/persistence http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/persistence/persistence_2_2.xsd
+-->
+
+<persistence xmlns='http://xmlns.jcp.org/xml/ns/persistence'
+             xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+             xsi:schemaLocation='http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd'
+             version='2.1'>
+
+  <persistence-unit name="openfirePU" transaction-type="RESOURCE_LOCAL">
+    <provider>${persistence.provider}</provider>
+    <class>com.github.jinahya.openfire.persistence.Date015AttributeConverter</class>
+    <class>com.github.jinahya.openfire.persistence.DateMillisAttributeConverter</class>
+    <class>com.github.jinahya.openfire.persistence.OfGroup</class>
+    <class>com.github.jinahya.openfire.persistence.OfGroupProp</class>
+    <class>com.github.jinahya.openfire.persistence.OfMucRoom</class>
+    <class>com.github.jinahya.openfire.persistence.OfMucService</class>
+    <class>com.github.jinahya.openfire.persistence.OfMucServiceProp</class>
+    <class>com.github.jinahya.openfire.persistence.OfUser</class>
+    <class>com.github.jinahya.openfire.persistence.OfUserProp</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.driver" value="${jdbc.driver}"/>
+      <property name="javax.persistence.jdbc.url" value="${jdbc.url}"/>
+      <property name="javax.persistence.jdbc.user" value="${jdbc.user}"/>
+      <property name="javax.persistence.jdbc.password" value="${jdbc.password}"/>
+    </properties>
+  </persistence-unit>
+
+</persistence>
