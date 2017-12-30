@@ -13,23 +13,4 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@XmlSchema(
-        attributeFormDefault = XmlNsForm.UNQUALIFIED,
-        elementFormDefault = XmlNsForm.QUALIFIED,
-        namespace = XmlConstants.NS_URI_OPENFIRE_BIND,
-        xmlns = {
-            @XmlNs(prefix = XMLConstants.DEFAULT_NS_PREFIX,
-                   namespaceURI = XmlConstants.NS_URI_OPENFIRE_BIND),
-            @XmlNs(prefix = "xsi",
-                   namespaceURI = XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI)
-        }
-)
-@XmlAccessorType(XmlAccessType.NONE)
 package com.github.jinahya.openfire.persistence;
-
-import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlNs;
-import javax.xml.bind.annotation.XmlNsForm;
-import javax.xml.bind.annotation.XmlSchema;

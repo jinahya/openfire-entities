@@ -17,14 +17,12 @@ package com.github.jinahya.openfire.persistence;
 
 import java.io.Serializable;
 import javax.persistence.MappedSuperclass;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * An abstract class for all domain objects.
  *
  * @author Jin Kwon &lt;onacit at gmail.com&gt;
  */
-@XmlTransient
 @MappedSuperclass
 public abstract class OfMapped implements Serializable {
 

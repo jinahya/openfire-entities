@@ -19,8 +19,6 @@ import static java.lang.invoke.MethodHandles.lookup;
 import static java.util.Optional.ofNullable;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
-import javax.json.bind.annotation.JsonbProperty;
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
@@ -31,9 +29,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * An entity class for {@value #TABLE_NAME} table.
@@ -92,8 +87,6 @@ public class OfRosterGroup extends OfMapped {
     }
 
     // -------------------------------------------------------------- idInstance
-    @JsonbTransient
-    @XmlTransient
     public OfRosterGroupId getIdInstance() {
         return new OfRosterGroupId()
                 .roster(getRosterRosterId())
@@ -114,7 +107,6 @@ public class OfRosterGroup extends OfMapped {
         return this;
     }
 
-    @XmlAttribute
     public Long getRosterRosterId() {
         return ofNullable(getRoster()).map(OfRoster::getRosterId).orElse(null);
     }
@@ -148,8 +140,6 @@ public class OfRosterGroup extends OfMapped {
     }
 
     // -------------------------------------------------------------------------
-    @JsonbTransient
-    @XmlTransient
     @NotNull
     @Id
     @ManyToOne(optional = false)
@@ -161,16 +151,12 @@ public class OfRosterGroup extends OfMapped {
     @NamedAttribute(ATTRIBUTE_NAME_ROSTER)
     private OfRoster roster;
 
-    @JsonbProperty()
-    @XmlElement(required = true)
     @NotNull
     @Id
     @Column(name = COLUMN_NAME_RANK, nullable = false)
     @NamedAttribute(ATTRIBUTE_NAME_RANK)
     private Long rank;
 
-    @JsonbProperty()
-    @XmlElement(required = true)
     @Size(max = SIZE_MAX_GROUP_NAME, min = SIZE_MAX_GROUP_NAME)
     @NotNull
     @Column(name = COLUMN_NAME_RANK, nullable = false)

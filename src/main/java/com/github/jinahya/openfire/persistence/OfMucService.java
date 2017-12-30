@@ -16,20 +16,16 @@
 package com.github.jinahya.openfire.persistence;
 
 import java.util.Objects;
-import javax.json.bind.annotation.JsonbProperty;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * An entity for {@value #TABLE_NAME} table.
  *
  * @author Jin Kwon &lt;onacit at gmail.com&gt;
  */
-@XmlRootElement
 @Entity
 public class OfMucService extends OfMapped {
 
@@ -155,30 +151,22 @@ public class OfMucService extends OfMapped {
     }
 
     // -------------------------------------------------------------------------
-    @JsonbProperty()
-    @XmlElement()
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = COLUMN_NAME_SERVICE_ID, nullable = false, unique = true)
     @NamedAttribute(ATTRIBUTE_NAME_SERVICE_ID)
     private Long serviceId;
 
-    @JsonbProperty()
-    @XmlElement(required = true)
     @NotNull
     //@Id
     @Column(name = COLUMN_NAME_SUBDOMAIN, nullable = false, unique = true)
     @NamedAttribute(ATTRIBUTE_NAME_SUBDOMAIN)
     private String subdomain;
 
-    @JsonbProperty(nillable = true)
-    @XmlElement(nillable = true)
     @Column(name = COLUMN_NAME_DESCRIPTION)
     @NamedAttribute(ATTRIBUTE_NAME_DESCRIPTION)
     private String description;
 
-    @JsonbProperty()
-    @XmlElement(required = true)
     @Column(name = COLUMN_NAME_IS_HIDDEN, nullable = false)
     @NamedAttribute(ATTRIBUTE_NAME_HIDDEN)
     private boolean hidden;

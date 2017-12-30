@@ -18,7 +18,6 @@ package com.github.jinahya.openfire.persistence;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.MappedSuperclass;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * An abstract class for prop id classes.
@@ -26,7 +25,6 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Jin Kwon &lt;onacit at gmail.com&gt;
  * @param <T> subclass type parameter
  */
-@XmlTransient
 @MappedSuperclass
 public abstract class OfPropId<T extends OfPropId<T>> implements Serializable {
 

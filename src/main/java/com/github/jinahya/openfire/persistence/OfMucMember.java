@@ -20,8 +20,6 @@ import java.util.Objects;
 import static java.util.Optional.ofNullable;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
-import javax.json.bind.annotation.JsonbProperty;
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
@@ -31,17 +29,12 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * An entity class for {@value #TABLE_NAME} table.
  *
  * @author Jin Kwon &lt;onacit at gmail.com&gt;
  */
-@XmlRootElement
 @IdClass(OfMucMemberId.class)
 @Entity
 public class OfMucMember extends OfMapped {
@@ -145,8 +138,6 @@ public class OfMucMember extends OfMapped {
     }
 
     // -------------------------------------------------------------- idInstance
-    @JsonbTransient
-    @XmlTransient
     public OfMucMemberId getIdInstance() {
         return new OfMucMemberId().room(getRoomRoomId()).jid(getJid());
     }
@@ -165,8 +156,6 @@ public class OfMucMember extends OfMapped {
         return this;
     }
 
-    @JsonbProperty
-    @XmlAttribute
     public Long getRoomRoomId() {
         return ofNullable(getRoom()).map(OfMucRoom::getRoomId).orElse(null);
     }
@@ -270,8 +259,6 @@ public class OfMucMember extends OfMapped {
     }
 
     // -------------------------------------------------------------------------
-    @JsonbTransient
-    @XmlTransient
     @NotNull
     @Id
     @ManyToOne(optional = false)
@@ -283,46 +270,32 @@ public class OfMucMember extends OfMapped {
     @NamedAttribute(ATTRIBUTE_NAME_ROOM)
     private OfMucRoom room;
 
-    @JsonbProperty()
-    @XmlElement(required = true)
     @NotNull
     @Id
     @Column(name = COLUMN_NAME_JID, nullable = false)
     @NamedAttribute(ATTRIBUTE_NAME_JID)
     private String jid;
 
-    @JsonbProperty(nillable = true)
-    @XmlElement(nillable = true)
     @Column(name = COLUMN_NAME_NICKNAME)
     @NamedAttribute(ATTRIBUTE_NAME_NICKNAME)
     private String nickname;
 
-    @JsonbProperty(nillable = true)
-    @XmlElement(nillable = true)
     @Column(name = COLUMN_NAME_FIRST_NAME)
     @NamedAttribute(ATTRIBUTE_NAME_FIRST_NAME)
     private String firstName;
 
-    @JsonbProperty(nillable = true)
-    @XmlElement(nillable = true)
     @Column(name = COLUMN_NAME_LAST_NAME)
     @NamedAttribute(ATTRIBUTE_NAME_LAST_NAME)
     private String lastName;
 
-    @JsonbProperty(nillable = true)
-    @XmlElement(nillable = true)
     @Column(name = COLUMN_NAME_URL)
     @NamedAttribute(ATTRIBUTE_NAME_URL)
     private String url;
 
-    @JsonbProperty(nillable = true)
-    @XmlElement(nillable = true)
     @Column(name = COLUMN_NAME_EMAIL)
     @NamedAttribute(ATTRIBUTE_NAME_EMAIL)
     private String email;
 
-    @JsonbProperty(nillable = true)
-    @XmlElement(nillable = true)
     @Column(name = COLUMN_NAME_FAQENTRY)
     @NamedAttribute(ATTRIBUTE_NAME_FAQENTRY)
     private String faqentry;

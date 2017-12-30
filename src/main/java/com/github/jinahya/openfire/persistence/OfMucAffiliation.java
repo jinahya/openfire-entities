@@ -19,7 +19,6 @@ import static java.lang.invoke.MethodHandles.lookup;
 import static java.util.Optional.ofNullable;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
@@ -29,9 +28,6 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * An entity for {@link #TABLE_NAME} table.
@@ -81,8 +77,6 @@ public class OfMucAffiliation extends OfMapped {
      *
      * @return an id instance.
      */
-    @JsonbTransient
-    @XmlTransient
     public OfMucAffiliationId getIdInstance() {
         return new OfMucAffiliationId().room(getRoomRoomId()).jid(getJid());
     }
@@ -106,7 +100,6 @@ public class OfMucAffiliation extends OfMapped {
      *
      * @return the value of {@code room.roomId}
      */
-    @XmlAttribute
     public Long getRoomRoomId() {
         return ofNullable(getRoom()).map(OfMucRoom::getRoomId).orElse(null);
     }
@@ -140,8 +133,6 @@ public class OfMucAffiliation extends OfMapped {
     }
 
     // -------------------------------------------------------------------------
-    @JsonbTransient
-    @XmlTransient
     @NotNull
     @Id
     @ManyToOne(optional = false)
@@ -152,13 +143,11 @@ public class OfMucAffiliation extends OfMapped {
                 updatable = false)
     private OfMucRoom room;
 
-    @XmlElement(required = true)
     @NotNull
     @Id
     @Column(name = COLUMN_NAME_JID, nullable = false)
     private String jid;
 
-    @XmlElement(required = true)
     @NotNull
     @Column(name = COLUMN_NAME_AFFILIATION, nullable = false)
     private int affiliation;

@@ -16,7 +16,6 @@
 package com.github.jinahya.openfire.persistence;
 
 import java.io.Serializable;
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
@@ -25,8 +24,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * An entity class for {@value #TABLE_NAME} table.
@@ -84,19 +81,16 @@ public class OfVCard implements Serializable {
     }
 
     // -------------------------------------------------------------------------
-    @JsonbTransient
-    @XmlTransient
     @NotNull
     @Id
     @ManyToOne(optional = false)
     @JoinColumn(foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT),
-            name = COLUMN_NAME_USERNAME,
-            nullable = false,
-            referencedColumnName = OfUser.COLUMN_NAME_USERNAME,
-            updatable = false)
+                name = COLUMN_NAME_USERNAME,
+                nullable = false,
+                referencedColumnName = OfUser.COLUMN_NAME_USERNAME,
+                updatable = false)
     private OfUser ofUser;
 
-    @XmlElement(required = true)
     @NotNull
     @Column(name = COLUMN_NAME_VCARD, nullable = false)
     private String vcard;

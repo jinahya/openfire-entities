@@ -20,8 +20,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 import static java.util.Optional.ofNullable;
-import javax.json.bind.annotation.JsonbProperty;
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Convert;
@@ -32,9 +30,6 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * An entity class for {@value #TABLE_NAME} table.
@@ -126,8 +121,6 @@ public class OfOffline implements Serializable {
     }
 
     // -------------------------------------------------------------- idInstance
-    @JsonbTransient
-    @XmlTransient
     public OfOfflineId getIdIsnstance() {
         return new OfOfflineId()
                 .user(getUserUsername())
@@ -148,7 +141,6 @@ public class OfOffline implements Serializable {
         return this;
     }
 
-    @XmlAttribute
     public String getUserUsername() {
         return ofNullable(getUser()).map(OfUser::getUsername).orElse(null);
     }
@@ -205,8 +197,6 @@ public class OfOffline implements Serializable {
     }
 
     // -------------------------------------------------------------------------
-    @JsonbTransient
-    @XmlTransient
     @NotNull
     @Id
     @ManyToOne(optional = false)
@@ -217,25 +207,20 @@ public class OfOffline implements Serializable {
                 updatable = false)
     private OfUser user;
 
-    @JsonbProperty
-    @XmlElement(required = true)
     @NotNull
     @Id
     @Column(name = COLUMN_NAME_MESSAGE_ID, nullable = false, updatable = false)
     private Long messageId;
 
-    @XmlElement(required = true)
     @NotNull
     //@Temporal(TemporalType.TIMESTAMP)
     @Convert(converter = Date015AttributeConverter.class)
     @Column(name = COLUMN_NAME_CREATION_DATE, nullable = false)
     private Date creationDate;
 
-    @XmlElement(required = true)
     @Column(name = COLUMN_NAME_MESSAGE_SIZE, nullable = false)
     private int messageSize;
 
-    @XmlElement(required = true)
     @NotNull
     @Column(name = COLUMN_NAME_STANZA, nullable = false)
     private String stanza;

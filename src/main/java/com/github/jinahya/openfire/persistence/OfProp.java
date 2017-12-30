@@ -17,13 +17,10 @@ package com.github.jinahya.openfire.persistence;
 
 import java.util.Objects;
 import static java.util.Optional.ofNullable;
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * An abstract class for {@code Prop} classes.
@@ -31,7 +28,6 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Jin Kwon &lt;onacit at gmail.com&gt;
  * @param <T> subclass type parameter
  */
-@XmlTransient
 @MappedSuperclass
 public abstract class OfProp<T extends OfProp<T>> extends OfMapped {
 
@@ -115,33 +111,25 @@ public abstract class OfProp<T extends OfProp<T>> extends OfMapped {
         return (T) this;
     }
 
-    @JsonbTransient
-    @XmlTransient
     public Boolean getPropValueAsBoolean() {
         return ofNullable(getPropValue()).map(Boolean::valueOf).orElse(null);
     }
 
-    @JsonbTransient
-    @XmlTransient
     public Integer getPropValueAsInteger() {
         return ofNullable(getPropValue()).map(Integer::valueOf).orElse(null);
     }
 
-    @JsonbTransient
-    @XmlTransient
     public Long getPropValueAsLong() {
         return ofNullable(getPropValue()).map(Long::valueOf).orElse(null);
     }
 
     // -------------------------------------------------------------------------
-    @XmlElement(required = true)
     @NotNull
     @Id
     @Column(name = COLUMN_NAME_NAME, nullable = false)
     @NamedAttribute(ATTRIBUTE_NAME_NAME)
     private String name;
 
-    @XmlElement(required = true)
     @NotNull
     @Column(name = COLUMN_NAME_PROP_VALUE, nullable = false)
     @NamedAttribute(ATTRIBUTE_NAME_PROP_VALUE)

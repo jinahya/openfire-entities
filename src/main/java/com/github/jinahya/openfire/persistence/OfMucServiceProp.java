@@ -17,8 +17,6 @@ package com.github.jinahya.openfire.persistence;
 
 import java.util.Objects;
 import static java.util.Optional.ofNullable;
-import javax.json.bind.annotation.JsonbProperty;
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -26,16 +24,12 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * Entity class for {@value #TABLE_NAME} table.
  *
  * @author Jin Kwon &lt;onacit at gmail.com&gt;
  */
-@XmlRootElement
 @Entity
 @IdClass(OfMucServicePropId.class)
 public class OfMucServiceProp extends OfProp<OfMucServiceProp> {
@@ -87,8 +81,6 @@ public class OfMucServiceProp extends OfProp<OfMucServiceProp> {
     }
 
     // -------------------------------------------------------------- idInstance
-    @JsonbTransient
-    @XmlTransient
     public OfMucServicePropId getIdInstance() {
         return new OfMucServicePropId()
                 .service(getServiceServiceId())
@@ -109,23 +101,17 @@ public class OfMucServiceProp extends OfProp<OfMucServiceProp> {
         return this;
     }
 
-    @JsonbProperty
-    @XmlAttribute
     public Long getServiceServiceId() {
         return ofNullable(getService()).map(OfMucService::getServiceId)
                 .orElse(null);
     }
 
-    @JsonbProperty
-    @XmlAttribute
     public String getServiceSubdomain() {
         return ofNullable(getService()).map(OfMucService::getSubdomain)
                 .orElse(null);
     }
 
     // -------------------------------------------------------------------------
-    @JsonbTransient
-    @XmlTransient
     @Id
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT),

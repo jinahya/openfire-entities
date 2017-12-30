@@ -17,8 +17,6 @@ package com.github.jinahya.openfire.persistence;
 
 import static com.github.jinahya.openfire.persistence.Utilities.copyOf;
 import java.util.Date;
-import javax.json.bind.annotation.JsonbProperty;
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -27,16 +25,12 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * Entity class for {@value #TABLE_NAME} table.
  *
  * @author Jin Kwon &lt;onacit at gmail.com&gt;
  */
-@XmlRootElement
 @Entity
 public class OfUser extends OfMapped {
 
@@ -146,18 +140,18 @@ public class OfUser extends OfMapped {
     @Override
     public String toString() {
         return super.toString() + "{"
-                + "username=" + username
-                + ",storedKey=" + storedKey
-                + ",serverKey=" + serverKey
-                + ",salt=" + salt
-                + ",iterations=" + iterations
-                + ",plainPassword=" + plainPassword
-                + ",encryptedPassword=" + encryptedPassword
-                + ",name=" + name
-                + ",email=" + email
-                + ",creationDate=" + creationDate
-                + ",modificationDate=" + modificationDate
-                + "}";
+               + "username=" + username
+               + ",storedKey=" + storedKey
+               + ",serverKey=" + serverKey
+               + ",salt=" + salt
+               + ",iterations=" + iterations
+               + ",plainPassword=" + plainPassword
+               + ",encryptedPassword=" + encryptedPassword
+               + ",name=" + name
+               + ",email=" + email
+               + ",creationDate=" + creationDate
+               + ",modificationDate=" + modificationDate
+               + "}";
     }
 
     // ---------------------------------------------------------------- username
@@ -231,66 +225,46 @@ public class OfUser extends OfMapped {
     }
 
     // -------------------------------------------------------------------------
-    @JsonbProperty()
-    @XmlElement(required = true)
     @Id
     @NotNull
     @Column(name = COLUMN_NAME_USERNAME, unique = true, updatable = false)
     @NamedAttribute(ATTRIBUTE_NAME_USERNAME)
     private String username;
 
-    @JsonbTransient
-    @XmlTransient
     @Column(name = COLUMN_NAME_STORED_KEY)
     @NamedAttribute(ATTRIBUTE_NAME_STORED_KEY)
     private String storedKey;
 
-    @JsonbTransient
-    @XmlTransient
     @Column(name = COLUMN_NAME_SERVIER_KEY)
     @NamedAttribute(ATTRIBUTE_NAME_SERVIER_KEY)
     private String serverKey;
 
-    @JsonbTransient
-    @XmlTransient
     @Column(name = COLUMN_NAME_SALT)
     @NamedAttribute(ATTRIBUTE_NAME_SALT)
     private String salt;
 
-    @JsonbTransient
-    @XmlTransient
     @Column(name = COLUMN_NAME_ITERATIONS)
     @NamedAttribute(ATTRIBUTE_NAME_ITERATIONS)
     private int iterations;
 
-    @JsonbTransient
-    @XmlTransient
     @Column(name = COLUMN_NAME_PLAIN_PASSWORD)
     @NamedAttribute(ATTRIBUTE_NAME_PLAIN_PASSWORD)
     private String plainPassword;
 
-    @JsonbTransient
-    @XmlTransient
     @Column(name = COLUMN_NAME_ENCRYPTED_PASSWORD)
     @NamedAttribute(ATTRIBUTE_NAME_ENCRYPTED_PASSWORD)
     private String encryptedPassword;
 
-    @JsonbProperty(nillable = true)
-    @XmlElement(nillable = true)
     @Size(max = SIZE_MAX_NAME, min = SIZE_MIN_NAME)
     @Column(name = COLUMN_NAME_NAME)
     @NamedAttribute(ATTRIBUTE_NAME_NAME)
     private String name;
 
-    @JsonbProperty(nillable = true)
-    @XmlElement(nillable = true)
     @Size(max = SIZE_MAX_EMAIL, min = SIZE_MIN_EMAIL)
     @Column(name = COLUMN_NAME_EMAIL)
     @NamedAttribute(ATTRIBUTE_NAME_EMAIL)
     private String email;
 
-    @JsonbProperty()
-    @XmlElement()
     @NotNull
     //@Temporal(TemporalType.TIMESTAMP)
     @Convert(converter = Date015AttributeConverter.class)
@@ -299,8 +273,6 @@ public class OfUser extends OfMapped {
     @NamedAttribute(ATTRIBUTE_NAME_CREATION_DATE)
     private Date creationDate;
 
-    @JsonbProperty()
-    @XmlElement()
     @NotNull
     //@Temporal(TemporalType.TIMESTAMP)
     @Convert(converter = Date015AttributeConverter.class)

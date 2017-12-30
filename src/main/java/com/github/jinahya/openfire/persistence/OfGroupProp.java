@@ -17,8 +17,6 @@ package com.github.jinahya.openfire.persistence;
 
 import java.util.Objects;
 import static java.util.Optional.ofNullable;
-import javax.json.bind.annotation.JsonbProperty;
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -26,8 +24,6 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * Entity class for {@value #TABLE_NAME} table.
@@ -53,8 +49,8 @@ public class OfGroupProp extends OfProp<OfGroupProp> {
     @Override
     public String toString() {
         return super.toString() + "{"
-                + "group=" + group
-                + "}";
+               + "group=" + group
+               + "}";
     }
 
     @Override
@@ -77,8 +73,6 @@ public class OfGroupProp extends OfProp<OfGroupProp> {
     }
 
     // -------------------------------------------------------------- idInstance
-    @JsonbTransient
-    @XmlTransient
     public OfGroupPropId getIdInstance() {
         return new OfGroupPropId().group(getGroupGroupName()).name(getName());
     }
@@ -97,21 +91,17 @@ public class OfGroupProp extends OfProp<OfGroupProp> {
         return this;
     }
 
-    @JsonbProperty
-    @XmlAttribute
     public String getGroupGroupName() {
         return ofNullable(getGroup()).map(OfGroup::getGroupName).orElse(null);
     }
 
     // -------------------------------------------------------------------------
-    @JsonbTransient
-    @XmlTransient
     //@NotNull
     @Id
     @ManyToOne()
     @JoinColumn(foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT),
-            name = COLUMN_NAME_GROUP_NAME, nullable = false,
-            referencedColumnName = OfGroup.COLUMN_NAME_GROUP_NAME)
+                name = COLUMN_NAME_GROUP_NAME, nullable = false,
+                referencedColumnName = OfGroup.COLUMN_NAME_GROUP_NAME)
     @NamedAttribute(ATTRIBUTE_NAME_GROUP)
     private OfGroup group;
 }

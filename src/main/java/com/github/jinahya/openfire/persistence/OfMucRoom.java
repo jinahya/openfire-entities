@@ -19,8 +19,6 @@ import static com.github.jinahya.openfire.persistence.Utilities.copyOf;
 import static com.github.jinahya.openfire.persistence.Utilities.isozOf;
 import java.util.Date;
 import static java.util.Optional.ofNullable;
-import javax.json.bind.annotation.JsonbProperty;
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Convert;
@@ -31,17 +29,12 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * Entity class for {@value #TABLE_NAME} table.
  *
  * @author Jin Kwon &lt;onacit at gmail.com&gt;
  */
-@XmlRootElement
 @Entity
 @IdClass(OfMucRoomId.class)
 public class OfMucRoom extends OfMapped {
@@ -243,8 +236,6 @@ public class OfMucRoom extends OfMapped {
      *
      * @return the id instance of this entity.
      */
-    @JsonbTransient
-    @XmlTransient
     public OfMucRoomId getIdInstance() {
         return new OfMucRoomId().service(getServiceServiceId()).name(getName());
     }
@@ -263,7 +254,6 @@ public class OfMucRoom extends OfMapped {
         return this;
     }
 
-    @XmlAttribute
     public Long getServiceServiceId() {
         return ofNullable(getService()).map(OfMucService::getServiceId)
                 .orElse(null);
@@ -297,8 +287,6 @@ public class OfMucRoom extends OfMapped {
         return this;
     }
 
-    @JsonbProperty
-    @XmlAttribute
     public String getCreationDateIsoz() {
         return isozOf(getCreationDate());
     }
@@ -317,8 +305,6 @@ public class OfMucRoom extends OfMapped {
         return this;
     }
 
-    @JsonbProperty
-    @XmlAttribute
     public String getModificationDateIsoz() {
         return isozOf(getModificationDate());
     }
@@ -379,8 +365,6 @@ public class OfMucRoom extends OfMapped {
         return this;
     }
 
-    @JsonbProperty
-    @XmlAttribute
     public String getLockedDateIsoz() {
         return isozOf(getLockedDate());
     }
@@ -399,8 +383,6 @@ public class OfMucRoom extends OfMapped {
         return this;
     }
 
-    @JsonbProperty
-    @XmlAttribute
     public String getEmptyDateIsoz() {
         return isozOf(getEmptyDate());
     }
@@ -616,8 +598,6 @@ public class OfMucRoom extends OfMapped {
     }
 
     // -------------------------------------------------------------------------
-    @JsonbTransient
-    @XmlTransient
     @NotNull
     @Id
     @ManyToOne(optional = false)
@@ -628,15 +608,11 @@ public class OfMucRoom extends OfMapped {
     @NamedAttribute(ATTRIBUTE_NAME_SERVICE)
     private OfMucService service;
 
-    @JsonbProperty()
-    @XmlElement(required = true)
     @NotNull
     @Column(name = COLUMN_NAME_ROOM_ID, nullable = false, updatable = false)
     @NamedAttribute(ATTRIBUTE_NAME_ROOM_ID)
     private Long roomId;
 
-    @JsonbProperty()
-    @XmlElement(required = true)
     @NotNull
     //@Temporal(TemporalType.TIMESTAMP)
     @Convert(converter = Date015AttributeConverter.class)
@@ -645,8 +621,6 @@ public class OfMucRoom extends OfMapped {
     @NamedAttribute(ATTRIBUTE_NAME_CREATION_DATE)
     private Date creationDate;
 
-    @JsonbProperty()
-    @XmlElement(required = true)
     @NotNull
     //@Temporal(TemporalType.TIMESTAMP)
     @Convert(converter = Date015AttributeConverter.class)
@@ -655,31 +629,21 @@ public class OfMucRoom extends OfMapped {
     @NamedAttribute(ATTRIBUTE_NAME_MODIFICATION_DATE)
     private Date modificationDate;
 
-    @JsonbProperty()
-    @XmlElement(required = true)
     @NotNull
     @Id
     @Column(name = COLUMN_NAME_NAME, nullable = false)
     @NamedAttribute(ATTRIBUTE_NAME_NAME)
     private String name;
 
-    @JsonbProperty()
-    @XmlElement(required = true)
     @NotNull
     @Column(name = COLUMN_NAME_NATURAL_NAME, nullable = false)
     @NamedAttribute(ATTRIBUTE_NAME_NATURAL_NAME)
     private String naturalName;
 
-    @JsonbProperty(nillable = true)
-    @XmlElement(nillable = true)
     @Column(name = COLUMN_NAME_DESCRIPTION)
     @NamedAttribute(ATTRIBUTE_NAME_DESCRIPTION)
     private String description;
 
-    //@JsonbProperty()
-    //@XmlElement()
-    @JsonbTransient
-    @XmlTransient
     //@NotNull
     //@Temporal(TemporalType.TIMESTAMP)
     @Convert(converter = Date015AttributeConverter.class)
@@ -687,10 +651,6 @@ public class OfMucRoom extends OfMapped {
     @NamedAttribute(ATTRIBUTE_NAME_LOCKED_DATE)
     private Date lockedDate;
 
-    //@JsonbProperty(nillable = true)
-    //@XmlElement(nillable = true)
-    @JsonbTransient
-    @XmlTransient
     //@Temporal(TemporalType.TIMESTAMP)
     @Convert(converter = Date015AttributeConverter.class)
     @Column(name = COLUMN_NAME_EMPTY_DATE, updatable = false)
@@ -698,93 +658,66 @@ public class OfMucRoom extends OfMapped {
     private Date emptyDate;
 
     // Room Settings / Room Options / Allow Occupants to change Subject
-    @JsonbProperty()
-    @XmlElement()
     @Column(name = COLUMN_NAME_CAN_CHANGE_SUBJECT, nullable = false)
     @NamedAttribute(ATTRIBUTE_NAME_CAN_CHANGE_SUBJECT)
     private boolean canChangeSubject;
 
     // Room Settings / Maximum Room Occupants
-    @JsonbProperty()
-    @XmlElement()
     @Column(name = COLUMN_NAME_MAX_USERS, nullable = false)
     @NamedAttribute(ATTRIBUTE_NAME_MAX_USERS)
     private int maxUsers;
 
     // Room Settings / Room Options / List Room in Directory
-    @XmlElement(required = true)
     @Column(name = COLUMN_NAME_PUBLIC_ROOM, nullable = false)
     @NamedAttribute(ATTRIBUTE_NAME_PUBLIC_ROOM)
     private boolean publicRoom;
 
     // Room Settings / Room Options / Make Room Moderated
-    @JsonbProperty()
-    @XmlElement()
     @Column(name = COLUMN_NAME_MODERATED, nullable = false)
     @NamedAttribute(ATTRIBUTE_NAME_MODERATED)
     private boolean moderated;
 
     // Room Settings / Room Options / Make Room Members-only
-    @JsonbProperty()
-    @XmlElement()
     @Column(name = COLUMN_NAME_MEMBERS_ONLY, nullable = false)
     @NamedAttribute(ATTRIBUTE_NAME_MEMBERS_ONLY)
     private boolean membersOnly;
 
     // Room Settings / Room Options / Allow Occupants to invite Others
-    @JsonbProperty()
-    @XmlElement()
     @Column(name = COLUMN_NAME_CAN_INVITE, nullable = false)
     @NamedAttribute(ATTRIBUTE_NAME_CAN_INVITE)
     private boolean canInvite;
 
     // Room Settings / Password Required to Enter:
     // Room Settings / Confirm Password:
-    @JsonbProperty(nillable = true)
-    @XmlElement(nillable = true)
     @Column(name = COLUMN_NAME_ROOM_PASSWORD)
     @NamedAttribute(ATTRIBUTE_NAME_ROOM_PASSWORD)
     private String roomPassword;
 
     // Room Settings / Show Real JIDs of Occupants to == Anyone
-    @JsonbProperty()
-    @XmlElement()
     @Column(name = COLUMN_NAME_CAN_DISCOVER_JID, nullable = false)
     @NamedAttribute(ATTRIBUTE_NAME_CAN_DISCOVER_JID)
     private boolean canDiscoverJid;
 
-    @JsonbProperty()
-    @XmlElement()
     @Column(name = COLUMN_NAME_LOG_ENABLED, nullable = false)
     @NamedAttribute(ATTRIBUTE_NAME_LOG_ENABLED)
     private boolean logEnabled;
 
-    @JsonbProperty(nillable = true)
-    @XmlElement(nillable = true)
     @Column(name = COLUMN_NAME_SUBJECT)
     @NamedAttribute(ATTRIBUTE_NAME_SUBJECT)
     private String subject;
 
-    @JsonbProperty()
-    @XmlElement()
     @Column(name = COLUMN_NAME_ROLES_TO_BROADCAST, nullable = false)
     @NamedAttribute(ATTRIBUTE_NAME_ROLES_TO_BROADCAST)
     private int rolesToBroadcast;
 
-    @JsonbProperty()
-    @XmlElement()
     @Column(name = COLUMN_NAME_USE_RESERVED_NICK, nullable = false)
     @NamedAttribute(ATTRIBUTE_NAME_USE_RESERVED_NICK)
     private boolean useReservedNick;
 
-    @JsonbProperty()
-    @XmlElement()
     @Column(name = COLUMN_NAME_CAN_CHANGE_NICK, nullable = false)
     @NamedAttribute(ATTRIBUTE_NAME_CAN_CHANGE_NICK)
     private boolean canChangeNick;
 
-    @JsonbProperty()
-    @XmlElement()
     @Column(name = COLUMN_NAME_CAN_REGISTER, nullable = false)
     @NamedAttribute(ATTRIBUTE_NAME_CAN_REGISTER)
     private boolean canRegister;
@@ -794,8 +727,6 @@ public class OfMucRoom extends OfMapped {
     // Moderator:   2
     // Participant: 1
     // Anyone:      0
-    @JsonbProperty(nillable = true)
-    @XmlElement(nillable = true)
     @Column(name = COLUMN_NAME_ALLOWPM)
     @NamedAttribute(ATTRIBUTE_NAME_ALLOWPM)
     private Integer allowpm;

@@ -20,7 +20,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 import static java.util.Optional.ofNullable;
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Convert;
@@ -30,9 +29,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * An entity class for {@value #TABLE_NAME} table.
@@ -121,7 +117,6 @@ public class OfPresence implements Serializable {
         return this;
     }
 
-    @XmlAttribute
     public String getUserUsername() {
         return ofNullable(getUser()).map(OfUser::getUsername).orElse(null);
     }
@@ -155,8 +150,6 @@ public class OfPresence implements Serializable {
     }
 
     // -------------------------------------------------------------------------
-    @JsonbTransient
-    @XmlTransient
     @NotNull
     @Id
     @ManyToOne(optional = false)
@@ -168,12 +161,10 @@ public class OfPresence implements Serializable {
     @NamedAttribute(ATTRIBUTE_NAME_USER)
     private OfUser user;
 
-    @XmlElement(nillable = true)
     @Column(name = COLUMN_NAME_OFFLINE_PRESENCE)
     @NamedAttribute(ATTRIBUTE_NAME_OFFLINE_PRESENCE)
     private String offlinePresence;
 
-    @XmlElement(required = true)
     @NotNull
     //@Temporal(TemporalType.TIMESTAMP)
     @Convert(converter = Date015AttributeConverter.class)

@@ -18,8 +18,6 @@ package com.github.jinahya.openfire.persistence;
 import static java.lang.invoke.MethodHandles.lookup;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
-import javax.json.bind.annotation.JsonbProperty;
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
@@ -28,8 +26,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * Entity class for {@value #TABLE_NAME} table.
@@ -190,16 +186,12 @@ public class OfRoster extends OfMapped {
     }
 
     // -------------------------------------------------------------------------
-    @JsonbProperty
-    @XmlElement
     @Id
     @Column(name = COLUMN_NAME_ROSTER_ID, nullable = false, unique = true,
             updatable = false)
     @NamedAttribute(ATTRIBUTE_NAME_ROSTER_ID)
     private Long rosterId;
 
-    @JsonbTransient
-    @XmlTransient
     @ManyToOne(optional = false)
     @JoinColumn(foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT),
                 name = COLUMN_NAME_USERNAME,
@@ -209,29 +201,23 @@ public class OfRoster extends OfMapped {
     @NamedAttribute(ATTRIBUTE_NAME_USER)
     private OfUser user;
 
-    @XmlElement(required = true)
     @NotNull
     @Column(name = COLUMN_NAME_JID, nullable = false)
     @NamedAttribute(ATTRIBUTE_NAME_JID)
     private String jid;
 
-    @XmlElement(required = true)
     @Column(name = COLUMN_NAME_SUB, nullable = false)
     @NamedAttribute(ATTRIBUTE_NAME_SUB)
     private int sub;
 
-    @XmlElement(required = true)
     @Column(name = COLUMN_NAME_ASK, nullable = false)
     @NamedAttribute(ATTRIBUTE_NAME_ASK)
     private int ask;
 
-    @XmlElement(required = true)
     @Column(name = COLUMN_NAME_RECV, nullable = false)
     @NamedAttribute(ATTRIBUTE_NAME_RECV)
     private int recv;
 
-    @JsonbProperty(nillable = true)
-    @XmlElement(nillable = true)
     @Column(name = COLUMN_NAME_NICK)
     @NamedAttribute(ATTRIBUTE_NAME_NICK)
     private String nick;

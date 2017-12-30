@@ -19,7 +19,6 @@ import static com.github.jinahya.openfire.persistence.Utilities.copyOf;
 import java.io.Serializable;
 import java.util.Date;
 import static java.util.Optional.ofNullable;
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Convert;
@@ -30,9 +29,6 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * Entity class for {@value #TABLE_NAME} table.
@@ -62,8 +58,6 @@ public class OfUserFlag implements Serializable {
     public static final String COLUMN_NAME_END_TIME = "endTime";
 
     // -------------------------------------------------------------- idInstance
-    @JsonbTransient
-    @XmlTransient
     public OfUserFlagId getIdInstance() {
         return new OfUserFlagId().user(getUserUsername()).name(getName());
     }
@@ -82,7 +76,6 @@ public class OfUserFlag implements Serializable {
         return this;
     }
 
-    @XmlAttribute
     public String getUserUsername() {
         return ofNullable(getUser()).map(OfUser::getUsername).orElse(null);
     }
@@ -130,32 +123,27 @@ public class OfUserFlag implements Serializable {
     }
 
     // -------------------------------------------------------------------------
-    @JsonbTransient
-    @XmlTransient
     @NotNull
     @Id
     @ManyToOne(optional = false)
     @JoinColumn(foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT),
-            name = COLUMN_NAME_USERNAME,
-            nullable = false,
-            referencedColumnName = OfUser.COLUMN_NAME_USERNAME,
-            updatable = false)
+                name = COLUMN_NAME_USERNAME,
+                nullable = false,
+                referencedColumnName = OfUser.COLUMN_NAME_USERNAME,
+                updatable = false)
     private OfUser user;
 
-    @XmlElement(required = true)
     @NotNull
     @Id
     @Column(name = COLUMN_NAME_NAME)
     private String name;
 
     // -------------------------------------------------------------------------
-    @XmlElement(nillable = true)
     //@Temporal(TemporalType.TIMESTAMP)
     @Convert(converter = Date015AttributeConverter.class)
     @Column(name = COLUMN_NAME_START_TIME)
     private Date startTime;
 
-    @XmlElement(nillable = true)
     //@Temporal(TemporalType.TIMESTAMP)
     @Convert(converter = Date015AttributeConverter.class)
     @Column(name = COLUMN_NAME_END_TIME)

@@ -16,8 +16,6 @@
 package com.github.jinahya.openfire.persistence;
 
 import static java.util.Optional.ofNullable;
-import javax.json.bind.annotation.JsonbProperty;
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -25,16 +23,12 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * The entity class for {@value #TABLE_NAME} table.
  *
  * @author Jin Kwon &lt;onacit at gmail.com&gt;
  */
-@XmlRootElement
 @Entity
 @IdClass(OfUserPropId.class)
 public class OfUserProp extends OfProp<OfUserProp> {
@@ -65,8 +59,8 @@ public class OfUserProp extends OfProp<OfUserProp> {
     @Override
     public String toString() {
         return super.toString() + "{"
-                + "user=" + user
-                + "}";
+               + "user=" + user
+               + "}";
     }
 
     // -------------------------------------------------------------- idInstance
@@ -75,8 +69,6 @@ public class OfUserProp extends OfProp<OfUserProp> {
      *
      * @return the id instance
      */
-    @JsonbTransient
-    @XmlTransient
     public OfUserPropId getIdInstance() {
         return new OfUserPropId().user(getUserUsername()).name(getName());
     }
@@ -95,23 +87,19 @@ public class OfUserProp extends OfProp<OfUserProp> {
         return this;
     }
 
-    @JsonbProperty
-    @XmlAttribute
     public String getUserUsername() {
         return ofNullable(getUser()).map(OfUser::getUsername).orElse(null);
     }
 
     // -------------------------------------------------------------------------
-    @JsonbTransient
-    @XmlTransient
     //@NotNull
     @Id
     @ManyToOne(optional = false)
     @JoinColumn(foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT),
-            name = COLUMN_NAME_USERNAME,
-            nullable = false,
-            referencedColumnName = OfUser.COLUMN_NAME_USERNAME,
-            updatable = false)
+                name = COLUMN_NAME_USERNAME,
+                nullable = false,
+                referencedColumnName = OfUser.COLUMN_NAME_USERNAME,
+                updatable = false)
     @NamedAttribute(ATTRIBUTE_NAME_USER)
     private OfUser user;
 }

@@ -17,7 +17,6 @@ package com.github.jinahya.openfire.persistence;
 
 import java.io.Serializable;
 import java.util.Objects;
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
@@ -27,8 +26,6 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * An entity class for {@value #TABLE_NAME} table.
@@ -170,8 +167,6 @@ public class OfPrivacyList implements Serializable {
     }
 
     // -------------------------------------------------------------------------
-    @JsonbTransient
-    @XmlTransient
     @NotNull
     @Id
     @ManyToOne(optional = false)
@@ -182,17 +177,14 @@ public class OfPrivacyList implements Serializable {
                 updatable = false)
     private OfUser user;
 
-    @XmlElement(required = true)
     @NotNull
     @Id
     @Column(name = COLUMN_NAME_NAME)
     private String name;
 
-    @XmlElement(required = true)
     @Column(name = COLUMN_NAME_IS_DEFAULT, nullable = false)
     private boolean default__;
 
-    @XmlElement(required = true)
     @NotNull
     @Column(name = COLUMN_NAME_LIST, nullable = false)
     private String list;

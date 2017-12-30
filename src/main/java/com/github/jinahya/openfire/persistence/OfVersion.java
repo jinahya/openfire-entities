@@ -20,8 +20,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 
 /**
  * Entity class for {@value #TABLE_NAME} table.
@@ -75,13 +73,11 @@ public class OfVersion implements Serializable {
     }
 
     // -------------------------------------------------------------------------
-    @XmlAttribute(required = true)
     @NotNull
     @Id
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @XmlElement(required = true)
     @Column(name = "version", nullable = false)
     private int version;
 }

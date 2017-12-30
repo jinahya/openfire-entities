@@ -19,8 +19,6 @@ import static com.github.jinahya.openfire.persistence.Utilities.copyOf;
 import static com.github.jinahya.openfire.persistence.Utilities.isozOf;
 import java.util.Date;
 import static java.util.Optional.ofNullable;
-import javax.json.bind.annotation.JsonbProperty;
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
@@ -34,17 +32,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * An entity class for {@value #TABLE_NAME} table.
  *
  * @author Jin Kwon &lt;onacit at gmail.com&gt;
  */
-@XmlRootElement
 @Entity
 public class OfMessageArchive extends OfMapped {
 
@@ -159,8 +152,6 @@ public class OfMessageArchive extends OfMapped {
         return this;
     }
 
-    @JsonbProperty
-    @XmlAttribute
     public Long getConversationConversationId() {
         return ofNullable(getConversation())
                 .map(OfConversation::getConversationId)
@@ -237,8 +228,6 @@ public class OfMessageArchive extends OfMapped {
         return this;
     }
 
-    @JsonbProperty
-    @XmlAttribute
     public String getSentDateIsoz() {
         return isozOf(getSentDate());
     }
@@ -272,16 +261,12 @@ public class OfMessageArchive extends OfMapped {
     }
 
     // -------------------------------------------------------------------------
-    @JsonbProperty()
-    @XmlElement()
     // @NotNull // column is nullable
     @Id // not specified!!!
     @Column(name = COLUMN_NAME_MESSAGE_ID)
     @NamedAttribute(ATTRIBUTE_NAME_MESSAGE_ID)
     private Long messageId;
 
-    @JsonbTransient
-    @XmlTransient
     //@NotNull
     @ManyToOne()
     @JoinColumn(
@@ -292,34 +277,24 @@ public class OfMessageArchive extends OfMapped {
     @NamedAttribute(ATTRIBUTE_NAME_CONVERSATION)
     private OfConversation conversation;
 
-    @JsonbProperty
-    @XmlElement
     @NotNull
     @Column(name = COLUMN_NAME_FROM_JID, nullable = false)
     @NamedAttribute(ATTRIBUTE_NAME_FROM_JID)
     private String fromJid;
 
-    @JsonbProperty(nillable = true)
-    @XmlElement(nillable = true)
     @Column(name = COLUMN_NAME_FROM_JID_RESOURCE)
     @NamedAttribute(ATTRIBUTE_NAME_FROM_JID_RESOURCE)
     private String fromJidResource;
 
-    @JsonbProperty
-    @XmlElement
     @NotNull
     @Column(name = COLUMN_NAME_TO_JID, nullable = false)
     @NamedAttribute(ATTRIBUTE_NAME_TO_JID)
     private String toJid;
 
-    @JsonbProperty(nillable = true)
-    @XmlElement(nillable = true)
     @Column(name = COLUMN_NAME_TO_JID_RESOURCE)
     @NamedAttribute(ATTRIBUTE_NAME_TO_JID_RESOURCE)
     private String toJidResource;
 
-    @JsonbProperty
-    @XmlElement(required = true)
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @Convert(converter = DateMillisAttributeConverter.class)
@@ -327,16 +302,12 @@ public class OfMessageArchive extends OfMapped {
     @NamedAttribute(ATTRIBUTE_NAME_SENT_DATE)
     private Date sentDate;
 
-    @JsonbProperty(nillable = true)
-    @XmlElement(nillable = true)
     @Lob
     @Basic
     @Column(name = COLUMN_NAME_STANZA)
     @NamedAttribute(ATTRIBUTE_NAME_STANZA)
     private String stanza;
 
-    @JsonbProperty(nillable = true)
-    @XmlElement(nillable = true)
     @Lob
     @Basic
     @Column(name = COLUMN_NAME_BODY)
