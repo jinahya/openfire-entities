@@ -15,14 +15,14 @@
  */
 package com.github.jinahya.openfire.persistence;
 
-import java.util.Date;
-import static java.util.Optional.ofNullable;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
+import java.util.Date;
+
+import static java.util.Optional.ofNullable;
 
 /**
- * An attribute converter for converting {@code Date} attribute to/from
- * milliseconds numeric columns.
+ * An attribute converter for converting {@code Date} attribute to/from milliseconds numeric columns.
  *
  * @author Jin Kwon &lt;onacit at gmail.com&gt;
  */

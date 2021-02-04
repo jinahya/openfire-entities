@@ -15,10 +15,6 @@
  */
 package com.github.jinahya.openfire.persistence;
 
-import static java.lang.invoke.MethodHandles.lookup;
-import static java.util.Optional.ofNullable;
-import java.util.logging.Logger;
-import static java.util.logging.Logger.getLogger;
 import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
@@ -29,6 +25,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.logging.Logger;
+
+import static java.lang.invoke.MethodHandles.lookup;
+import static java.util.Optional.ofNullable;
+import static java.util.logging.Logger.getLogger;
 
 /**
  * An entity class for {@value #TABLE_NAME} table.
@@ -69,6 +70,7 @@ public class OfRosterGroup extends OfMapped {
     public static final int SIZE_MIN_GROUP_NAME = 0;
 
     // -------------------------------------------------------------------------
+
     /**
      * Creates a new instance.
      */
@@ -79,11 +81,11 @@ public class OfRosterGroup extends OfMapped {
     // -------------------------------------------------------------------------
     @Override
     public String toString() {
-        return super.toString() + "{"
+        return super.toString() + '{'
                + "roster=" + roster
                + ",rank=" + rank
                + ",groupName=" + groupName
-               + "}";
+               + '}';
     }
 
     // -------------------------------------------------------------- idInstance

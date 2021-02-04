@@ -15,73 +15,66 @@
  */
 package com.github.jinahya.openfire.persistence;
 
-import java.util.Objects;
-import static java.util.Optional.ofNullable;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
+
+import static java.util.Optional.ofNullable;
 
 /**
- * An abstract class for {@code Prop} classes.
+ * An abstract class for {@code ...Prop} classes.
  *
  * @author Jin Kwon &lt;onacit at gmail.com&gt;
- * @param <T> subclass type parameter
  */
 @MappedSuperclass
-public abstract class OfProp<T extends OfProp<T>> extends OfMapped {
+public abstract class OfProp extends OfMapped {
 
     private static final long serialVersionUID = -1750574068804750182L;
 
-    // -------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+    public static final String ATTRIBUTE_NAME_ID = "id";
+
+    // -----------------------------------------------------------------------------------------------------------------
     public static final String COLUMN_NAME_NAME = "name";
 
     public static final String ATTRIBUTE_NAME_NAME = "name";
 
-    // -------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
     public static final String COLUMN_NAME_PROP_VALUE = "propValue";
 
     public static final String ATTRIBUTE_NAME_PROP_VALUE = "propValue";
 
-    // -------------------------------------------------------------------------
-    @Override
-    public String toString() {
-        return super.toString() + "{"
-               + "name=" + name
-               + ",propValue=" + propValue
-               + "}";
+    // -----------------------------------------------------------------------------------------------------------------
+    protected OfProp() {
+        super();
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
     @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 89 * hash + Objects.hashCode(name);
-        //hash = 89 * hash + Objects.hashCode(propValue);
-        return hash;
+    public String toString() {
+        return super.toString() + '{'
+               + "name=" + name
+               + ",propValue=" + propValue
+               + '}';
     }
 
     @Override
     public boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final OfProp<?> other = (OfProp<?>) obj;
-        if (!Objects.equals(name, other.name)) {
-            return false;
-        }
-//        if (!Objects.equals(propValue, other.propValue)) {
-//            return false;
-//        }
-        return true;
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        final OfProp<?> ofProp = (OfProp<?>) obj;
+        return Objects.equals(name, ofProp.name)
+               && Objects.equals(propValue, ofProp.propValue);
     }
 
-    // -------------------------------------------------------------------- name
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, propValue);
+    }
+
+    // ------------------------------------------------------------------------------------------------------------ name
     public String getName() {
         return name;
     }
@@ -90,25 +83,13 @@ public abstract class OfProp<T extends OfProp<T>> extends OfMapped {
         this.name = name;
     }
 
-    @SuppressWarnings("unchecked")
-    public T name(final String name) {
-        setName(name);
-        return (T) this;
-    }
-
-    // --------------------------------------------------------------- propValue
+    // ------------------------------------------------------------------------------------------------------- propValue
     public String getPropValue() {
         return propValue;
     }
 
     public void setPropValue(final String propValue) {
         this.propValue = propValue;
-    }
-
-    @SuppressWarnings("unchecked")
-    public T propValue(final String propValue) {
-        setPropValue(propValue);
-        return (T) this;
     }
 
     public Boolean getPropValueAsBoolean() {
@@ -123,7 +104,7 @@ public abstract class OfProp<T extends OfProp<T>> extends OfMapped {
         return ofNullable(getPropValue()).map(Long::valueOf).orElse(null);
     }
 
-    // -------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
     @NotNull
     @Id
     @Column(name = COLUMN_NAME_NAME, nullable = false)

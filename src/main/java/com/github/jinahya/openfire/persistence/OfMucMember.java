@@ -15,11 +15,6 @@
  */
 package com.github.jinahya.openfire.persistence;
 
-import static java.lang.invoke.MethodHandles.lookup;
-import java.util.Objects;
-import static java.util.Optional.ofNullable;
-import java.util.logging.Logger;
-import static java.util.logging.Logger.getLogger;
 import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
@@ -29,6 +24,12 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
+import java.util.logging.Logger;
+
+import static java.lang.invoke.MethodHandles.lookup;
+import static java.util.Optional.ofNullable;
+import static java.util.logging.Logger.getLogger;
 
 /**
  * An entity class for {@value #TABLE_NAME} table.
@@ -46,9 +47,9 @@ public class OfMucMember extends OfMapped {
             = getLogger(lookup().lookupClass().getName());
 
     // -------------------------------------------------------------------------
+
     /**
-     * The name of the target table of this entity. The value is
-     * {@value #TABLE_NAME}.
+     * The name of the target table of this entity. The value is {@value #TABLE_NAME}.
      */
     public static final String TABLE_NAME = "ofMucMember";
 
@@ -96,7 +97,7 @@ public class OfMucMember extends OfMapped {
     // -------------------------------------------------------------------------
     @Override
     public String toString() {
-        return super.toString() + "{"
+        return super.toString() + '{'
                + "room=" + room
                + ",jid=" + jid
                + ",nickname=" + nickname
@@ -105,7 +106,7 @@ public class OfMucMember extends OfMapped {
                + ",url=" + url
                + ",email=" + email
                + ",faqentry=" + faqentry
-               + "}";
+               + '}';
     }
 
     @Override

@@ -15,8 +15,6 @@
  */
 package com.github.jinahya.openfire.persistence;
 
-import java.io.Serializable;
-import static java.util.Optional.ofNullable;
 import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
@@ -26,6 +24,9 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+
+import static java.util.Optional.ofNullable;
 
 /**
  * An entity class for {@value #TABLE_NAME} table.
@@ -63,6 +64,7 @@ public class OfPrivate implements Serializable {
     public static final String ATTRIBUTE_NAME_PRIVATE_DATA = "privateData";
 
     // -------------------------------------------------------------------------
+
     /**
      * Creates a new instance.
      */

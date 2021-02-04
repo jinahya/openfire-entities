@@ -15,10 +15,6 @@
  */
 package com.github.jinahya.openfire.persistence;
 
-import static com.github.jinahya.openfire.persistence.Utilities.copyOf;
-import static com.github.jinahya.openfire.persistence.Utilities.isozOf;
-import java.util.Date;
-import static java.util.Optional.ofNullable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
@@ -32,6 +28,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
+
+import static com.github.jinahya.openfire.persistence.Utilities.copyOf;
+import static com.github.jinahya.openfire.persistence.Utilities.isozOf;
+import static java.util.Optional.ofNullable;
 
 /**
  * An entity class for {@value #TABLE_NAME} table.
@@ -95,22 +96,21 @@ public class OfMessageArchive extends OfMapped {
     public static final String ATTRIBUTE_NAME_STANZA = "stanza";
 
     // -------------------------------------------------------------------------
+
     /**
-     * The name of the column to which {@value #ATTRIBUTE_NAME_BODY} attribute
-     * is bound.
+     * The name of the column to which {@value #ATTRIBUTE_NAME_BODY} attribute is bound.
      */
     public static final String COLUMN_NAME_BODY = "body";
 
     /**
-     * The name of the attribute from which {@value #COLUMN_NAME_BODY} column is
-     * bound.
+     * The name of the attribute from which {@value #COLUMN_NAME_BODY} column is bound.
      */
     public static final String ATTRIBUTE_NAME_BODY = "body";
 
     // -------------------------------------------------------------------------
     @Override
     public String toString() {
-        return super.toString() + "{"
+        return super.toString() + '{'
                + "messageId=" + messageId
                + ",conversationId=" + getConversationConversationId()
                + ",fromJid=" + fromJid
@@ -121,7 +121,7 @@ public class OfMessageArchive extends OfMapped {
                + ",sentDateIsoz=" + getSentDateIsoz()
                + ",stanza=" + stanza
                + ",body=" + body
-               + "}";
+               + '}';
     }
 
     // -------------------------------------------------------------------------

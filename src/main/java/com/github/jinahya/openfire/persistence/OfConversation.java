@@ -15,8 +15,6 @@
  */
 package com.github.jinahya.openfire.persistence;
 
-import static com.github.jinahya.openfire.persistence.Utilities.copyOf;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -25,6 +23,9 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
+
+import static com.github.jinahya.openfire.persistence.Utilities.copyOf;
 import static com.github.jinahya.openfire.persistence.Utilities.isozOf;
 
 /**
@@ -38,21 +39,21 @@ public class OfConversation extends OfMapped {
     private static final long serialVersionUID = -8556282042062757153L;
 
     // -------------------------------------------------------------------------
+
     /**
      * The name of the target table. The value is {@value #TABLE_NAME}.
      */
     public static final String TABLE_NAME = "ofConversation";
 
     // -------------------------------------------------------------------------
+
     /**
-     * The target column name to which {@value #ATTRIBUTE_NAME_CONVERSATION_ID}
-     * attribute is bound.
+     * The target column name to which {@value #ATTRIBUTE_NAME_CONVERSATION_ID} attribute is bound.
      */
     public static final String COLUMN_NAME_CONVERSATION_ID = "conversationID";
 
     /**
-     * The source attribute name from which
-     * {@value #COLUMN_NAME_CONVERSATION_ID} column is bound.
+     * The source attribute name from which {@value #COLUMN_NAME_CONVERSATION_ID} column is bound.
      */
     public static final String ATTRIBUTE_NAME_CONVERSATION_ID
             = "conversationId";
@@ -78,25 +79,24 @@ public class OfConversation extends OfMapped {
     public static final String ATTRIBUTE_NAME_LAST_ACTIVITY = "lastActivity";
 
     // -------------------------------------------------------------------------
+
     /**
-     * The name of the target column to which
-     * {@value #ATTRIBUTE_NAME_MESSAGE_COUNT} attribute is bound.
+     * The name of the target column to which {@value #ATTRIBUTE_NAME_MESSAGE_COUNT} attribute is bound.
      */
     public static final String COLUMN_NAME_MESSAGE_COUNT = "messageCount";
 
     /**
-     * The name of the source attribute from which
-     * {@value #COLUMN_NAME_MESSAGE_COUNT} column is bound.
+     * The name of the source attribute from which {@value #COLUMN_NAME_MESSAGE_COUNT} column is bound.
      */
     public static final String ATTRIBUTE_NAME_MESSAGE_COUNT = "messageCount";
 
     // -------------------------------------------------------------------------
+
     /**
-     * Returns the value for {@value #ATTRIBUTE_NAME_ROOM} attribute from given
-     * arguments. The result is
-     * {@code <ofMucRoom.name>@<ofMucRoom.service.subdomain>.<xmppDomain>}.
+     * Returns the value for {@value #ATTRIBUTE_NAME_ROOM} attribute from given arguments. The result is {@code
+     * <ofMucRoom.name>@<ofMucRoom.service.subdomain>.<xmppDomain>}.
      *
-     * @param ofMucRoom the room
+     * @param ofMucRoom  the room
      * @param xmppDomain the XMPP domain
      * @return the value for {@value #ATTRIBUTE_NAME_ROOM} attribute.
      */
@@ -124,6 +124,7 @@ public class OfConversation extends OfMapped {
     }
 
     // -------------------------------------------------------------------------
+
     /**
      * Creates a new instance.
      */
@@ -133,7 +134,7 @@ public class OfConversation extends OfMapped {
 
     @Override
     public String toString() {
-        return super.toString() + "{"
+        return super.toString() + '{'
                + "conversationId=" + conversationId
                + ",room=" + room
                + ",external=" + external
@@ -142,7 +143,7 @@ public class OfConversation extends OfMapped {
                + ",lastActivity=" + lastActivity
                + ",lastActivityIsoz=" + getLastActivityIsoz()
                + ",messageCount=" + messageCount
-               + "}";
+               + '}';
     }
 
     // ---------------------------------------------------------- conversationId

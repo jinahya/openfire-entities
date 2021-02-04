@@ -16,7 +16,6 @@
 package com.github.jinahya.openfire.persistence;
 
 /**
- *
  * @author Jin Kwon &lt;onacit at gmail.com&gt;
  */
 public final class XmlConstants {

@@ -18,18 +18,17 @@ package com.github.jinahya.openfire.persistence;
 /**
  * An abstract test class for testing subclasses of {@link OfProp}.
  *
- * @author Jin Kwon &lt;onacit at gmail.com&gt;
  * @param <T> subclass type parameter
+ * @author Jin Kwon &lt;onacit at gmail.com&gt;
  */
-abstract class OfPropTest<T extends OfProp<T>> extends OfMappedTest<T> {
+abstract class OfPropTest<T extends OfProp> extends OfMappedTest<T> {
 
-    // -------------------------------------------------------------------------
     /**
      * Creates a new instance.
      *
      * @param propClass the subclass of {@link OfProp} to test.
      */
-    public OfPropTest(final Class<T> propClass) {
+    protected OfPropTest(final Class<T> propClass) {
         super(propClass);
     }
 }

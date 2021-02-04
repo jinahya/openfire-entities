@@ -16,9 +16,10 @@
 package com.github.jinahya.openfire.persistence;
 
 import java.io.Serializable;
-import static java.lang.invoke.MethodHandles.lookup;
 import java.util.Objects;
 import java.util.logging.Logger;
+
+import static java.lang.invoke.MethodHandles.lookup;
 import static java.util.logging.Logger.getLogger;
 
 /**
@@ -37,10 +38,10 @@ public class OfMucAffiliationId implements Serializable {
     // -------------------------------------------------------------------------
     @Override
     public String toString() {
-        return super.toString() + "{"
+        return super.toString() + '{'
                + "room=" + room
                + ",jid=" + jid
-               + "}";
+               + '}';
     }
 
     @Override

@@ -15,9 +15,6 @@
  */
 package com.github.jinahya.openfire.persistence;
 
-import static java.lang.invoke.MethodHandles.lookup;
-import java.util.logging.Logger;
-import static java.util.logging.Logger.getLogger;
 import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
@@ -26,6 +23,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+import java.util.logging.Logger;
+
+import static java.lang.invoke.MethodHandles.lookup;
+import static java.util.logging.Logger.getLogger;
 
 /**
  * Entity class for {@value #TABLE_NAME} table.
@@ -45,9 +46,9 @@ public class OfRoster extends OfMapped {
             = getLogger(lookup().lookupClass().getName());
 
     // -------------------------------------------------------------------------
+
     /**
-     * The name of the target table of this entity. The value is
-     * {@value #TABLE_NAME}.
+     * The name of the target table of this entity. The value is {@value #TABLE_NAME}.
      */
     public static final String TABLE_NAME = "ofRoster";
 

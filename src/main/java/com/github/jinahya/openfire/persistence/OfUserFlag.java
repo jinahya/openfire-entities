@@ -15,10 +15,6 @@
  */
 package com.github.jinahya.openfire.persistence;
 
-import static com.github.jinahya.openfire.persistence.Utilities.copyOf;
-import java.io.Serializable;
-import java.util.Date;
-import static java.util.Optional.ofNullable;
 import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Convert;
@@ -29,6 +25,11 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.Date;
+
+import static com.github.jinahya.openfire.persistence.Utilities.copyOf;
+import static java.util.Optional.ofNullable;
 
 /**
  * Entity class for {@value #TABLE_NAME} table.

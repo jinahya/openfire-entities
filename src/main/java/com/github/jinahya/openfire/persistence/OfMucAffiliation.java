@@ -15,10 +15,6 @@
  */
 package com.github.jinahya.openfire.persistence;
 
-import static java.lang.invoke.MethodHandles.lookup;
-import static java.util.Optional.ofNullable;
-import java.util.logging.Logger;
-import static java.util.logging.Logger.getLogger;
 import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
@@ -28,6 +24,11 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+import java.util.logging.Logger;
+
+import static java.lang.invoke.MethodHandles.lookup;
+import static java.util.Optional.ofNullable;
+import static java.util.logging.Logger.getLogger;
 
 /**
  * An entity for {@link #TABLE_NAME} table.
@@ -64,6 +65,7 @@ public class OfMucAffiliation extends OfMapped {
     public static final String ATTRIBUTE_NAME_AFFILIATION = "affiliation";
 
     // -------------------------------------------------------------------------
+
     /**
      * Creates a new instance.
      */
@@ -72,6 +74,7 @@ public class OfMucAffiliation extends OfMapped {
     }
 
     // -------------------------------------------------------------- idInstance
+
     /**
      * Returns an id instance of this entity.
      *

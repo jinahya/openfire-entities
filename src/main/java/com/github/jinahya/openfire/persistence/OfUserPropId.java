@@ -29,9 +29,9 @@ public class OfUserPropId extends OfPropId<OfUserPropId> {
     // -------------------------------------------------------------------------
     @Override
     public String toString() {
-        return super.toString() + "{"
+        return super.toString() + '{'
                + "user=" + user
-               + "}";
+               + '}';
     }
 
     @Override

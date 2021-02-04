@@ -15,15 +15,16 @@
  */
 package com.github.jinahya.openfire.persistence;
 
-import java.util.Objects;
-import static java.util.Optional.ofNullable;
-import javax.persistence.ConstraintMode;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Entity class for {@value #TABLE_NAME} table.
@@ -32,25 +33,32 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 @IdClass(OfGroupPropId.class)
-public class OfGroupProp extends OfProp<OfGroupProp> {
+@Table(name = OfGroupProp.TABLE_NAME)
+public class OfGroupProp extends OfProp {
 
-    private static final long serialVersionUID = -8053224591064231755L;
+    private static final long serialVersionUID = 8633556437492074336L;
 
-    // -------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
     public static final String TABLE_NAME = "ofGroupProp";
 
-    // -------------------------------------------------------------------------
-    public static final String COLUMN_NAME_GROUP_NAME
-            = OfGroup.COLUMN_NAME_GROUP_NAME;
+    // -----------------------------------------------------------------------------------------------------------------
+    public static final String COLUMN_NAME_GROUP_NAME = OfGroup.COLUMN_NAME_GROUP_NAME;
+
+    public static final String ATTRIBUTE_NAME_GROUP_NAME = "groupName";
 
     public static final String ATTRIBUTE_NAME_GROUP = "group";
 
-    // -------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+    public OfGroupProp() {
+        super();
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
     @Override
     public String toString() {
-        return super.toString() + "{"
+        return super.toString() + '{'
                + "group=" + group
-               + "}";
+               + '}';
     }
 
     @Override
@@ -72,36 +80,34 @@ public class OfGroupProp extends OfProp<OfGroupProp> {
         return true;
     }
 
-    // -------------------------------------------------------------- idInstance
-    public OfGroupPropId getIdInstance() {
-        return new OfGroupPropId().group(getGroupGroupName()).name(getName());
+    // ------------------------------------------------------------------------------------------------------- groupName
+    String getGroupName() {
+        return groupName;
     }
 
-    // ------------------------------------------------------------------- group
+    void setGroupName(final String groupName) {
+        this.groupName = groupName;
+    }
+
+    // ----------------------------------------------------------------------------------------------------------- group
     public OfGroup getGroup() {
         return group;
     }
 
     public void setGroup(final OfGroup group) {
         this.group = group;
+        setGroupName(Optional.ofNullable(this.group).map(OfGroup::getGroupName).orElse(null));
     }
 
-    public OfGroupProp group(final OfGroup group) {
-        setGroup(group);
-        return this;
-    }
-
-    public String getGroupGroupName() {
-        return ofNullable(getGroup()).map(OfGroup::getGroupName).orElse(null);
-    }
-
-    // -------------------------------------------------------------------------
-    //@NotNull
+    // -----------------------------------------------------------------------------------------------------------------
     @Id
-    @ManyToOne()
-    @JoinColumn(foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT),
-                name = COLUMN_NAME_GROUP_NAME, nullable = false,
-                referencedColumnName = OfGroup.COLUMN_NAME_GROUP_NAME)
+    @Column(name = COLUMN_NAME_GROUP_NAME, nullable = false, insertable = true, updatable = false)
+    @NamedAttribute(ATTRIBUTE_NAME_GROUP_NAME)
+    private String groupName;
+
+    @NotNull
+    @ManyToOne(optional = false)
+    @JoinColumn(name = COLUMN_NAME_GROUP_NAME, nullable = false, insertable = false, updatable = false)
     @NamedAttribute(ATTRIBUTE_NAME_GROUP)
     private OfGroup group;
 }

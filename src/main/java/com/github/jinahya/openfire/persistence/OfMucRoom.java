@@ -15,10 +15,6 @@
  */
 package com.github.jinahya.openfire.persistence;
 
-import static com.github.jinahya.openfire.persistence.Utilities.copyOf;
-import static com.github.jinahya.openfire.persistence.Utilities.isozOf;
-import java.util.Date;
-import static java.util.Optional.ofNullable;
 import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Convert;
@@ -29,6 +25,11 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
+
+import static com.github.jinahya.openfire.persistence.Utilities.copyOf;
+import static com.github.jinahya.openfire.persistence.Utilities.isozOf;
+import static java.util.Optional.ofNullable;
 
 /**
  * Entity class for {@value #TABLE_NAME} table.
@@ -45,16 +46,15 @@ public class OfMucRoom extends OfMapped {
     public static final String TABLE_NAME = "ofMucRoom";
 
     // -------------------------------------------------------------------------
+
     /**
-     * The name of the column to which {@value #ATTRIBUTE_NAME_SERVICE}
-     * attribute is bound.
+     * The name of the column to which {@value #ATTRIBUTE_NAME_SERVICE} attribute is bound.
      */
     public static final String COLUMN_NAME_SERVICE_ID
             = OfMucService.COLUMN_NAME_SERVICE_ID;
 
     /**
-     * The name of the attribute from which {@value #COLUMN_NAME_SERVICE_ID}
-     * column is bound.
+     * The name of the attribute from which {@value #COLUMN_NAME_SERVICE_ID} column is bound.
      */
     public static final String ATTRIBUTE_NAME_SERVICE = "service";
 
@@ -199,7 +199,7 @@ public class OfMucRoom extends OfMapped {
     // -------------------------------------------------------------------------
     @Override
     public String toString() {
-        return super.toString() + "{"
+        return super.toString() + '{'
                + "service=" + service
                + ",roomId=" + roomId
                + ",creationDate=" + creationDate
@@ -231,6 +231,7 @@ public class OfMucRoom extends OfMapped {
     }
 
     // -------------------------------------------------------------- idInstance
+
     /**
      * Returns the id instance of this entity.
      *

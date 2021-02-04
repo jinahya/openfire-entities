@@ -15,137 +15,121 @@
  */
 package com.github.jinahya.openfire.persistence;
 
-import java.util.Objects;
-import static java.util.Optional.ofNullable;
 import javax.persistence.Column;
-import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
+
+import static java.util.Optional.ofNullable;
 
 /**
  * An entity class for {@value #TABLE_NAME} table.
  *
  * @author Jin Kwon &lt;onacit at gmail.com&gt;
+ * @see <a href="https://download.igniterealtime.org/openfire/docs/latest/documentation/database-guide.html#ofGroupUser">ofGoupUser</a>
  */
 @Entity
 @IdClass(OfGroupUserId.class)
+@Table(name = OfGroupUser.TABLE_NAME)
 public class OfGroupUser extends OfMapped {
 
     private static final long serialVersionUID = -4240253293616689097L;
 
-    // -------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
     public static final String TABLE_NAME = "ofGroupUser";
 
-    // -------------------------------------------------------------------------
-    public static final String COLUMN_NAME_GROUP_NAME
-            = OfGroup.COLUMN_NAME_GROUP_NAME;
+    // -----------------------------------------------------------------------------------------------------------------
+    public static final String COLUMN_NAME_GROUP_NAME = OfGroup.COLUMN_NAME_GROUP_NAME;
+
+    public static final String ATTRIBUTE_NAME_GROUP_NAME = "groupName";
 
     public static final String ATTRIBUTE_NAME_GROUP = "group";
 
-    // -------------------------------------------------------------------------
-    public static final String COLUMN_NAME_USERNAME
-            = OfUser.COLUMN_NAME_USERNAME;
+    // -----------------------------------------------------------------------------------------------------------------
+    public static final String COLUMN_NAME_USERNAME = OfUser.COLUMN_NAME_USERNAME;
+
+    public static final String ATTRIBUTE_NAME_USERNAME = "username";
 
     public static final String ATTRIBUTE_NAME_USER = "user";
 
-    // -------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
     public static final String COLUMN_NAME_ADMINISTRATOR = "administrator";
 
     public static final String ATTRIBUTE_NAME_ADMINISTRATOR = "administrator";
 
-    // -------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+    public OfGroupUser() {
+        super();
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
     @Override
     public String toString() {
-        return super.toString() + "{"
+        return super.toString() + '{'
                + "group=" + group
                + ",user=" + user
                + ",administrator=" + administrator
-               + "}";
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 17 * hash + Objects.hashCode(group);
-        hash = 17 * hash + Objects.hashCode(user);
-        hash = 17 * hash + (administrator ? 1 : 0);
-        return hash;
+               + '}';
     }
 
     @Override
     public boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final OfGroupUser other = (OfGroupUser) obj;
-        if (administrator != other.administrator) {
-            return false;
-        }
-        if (!Objects.equals(group, other.group)) {
-            return false;
-        }
-        if (!Objects.equals(user, other.user)) {
-            return false;
-        }
-        return true;
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        final OfGroupUser that = (OfGroupUser) obj;
+        return administrator == that.administrator
+               && Objects.equals(group, that.group)
+               && Objects.equals(user, that.user)
+                ;
     }
 
-    // -------------------------------------------------------------- idInstance
-    public OfGroupUserId getIdInstance() {
-        return new OfGroupUserId()
-                .group(getGroupGroupName())
-                .user(getUserUsername())
-                .administrator(isAdministrator());
+    @Override
+    public int hashCode() {
+        return Objects.hash(group, user, administrator);
     }
 
-    // ------------------------------------------------------------------- group
+    // ----------------------------------------------------------------------------------------------- groupName / group
+    String getGroupName() {
+        return groupName;
+    }
+
+    void setGroupName(final String groupName) {
+        this.groupName = groupName;
+    }
+
     public OfGroup getGroup() {
         return group;
     }
 
     public void setGroup(final OfGroup group) {
         this.group = group;
+        this.setGroupName(ofNullable(this.group).map(OfGroup::getGroupName).orElse(null));
     }
 
-    public OfGroupUser group(final OfGroup group) {
-        setGroup(group);
-        return this;
+    // ------------------------------------------------------------------------------------------------- username / user
+    public String getUsername() {
+        return username;
     }
 
-    public String getGroupGroupName() {
-        return ofNullable(getGroup()).map(OfGroup::getGroupName).orElse(null);
+    public void setUsername(final String username) {
+        this.username = username;
     }
 
-    // -------------------------------------------------------------------- user
     public OfUser getUser() {
         return user;
     }
 
     public void setUser(final OfUser user) {
         this.user = user;
+        setUsername(ofNullable(this.user).map(OfUser::getUsername).orElse(null));
     }
 
-    public OfGroupUser user(final OfUser user) {
-        setUser(user);
-        return this;
-    }
-
-    public String getUserUsername() {
-        return ofNullable(getUser()).map(OfUser::getUsername).orElse(null);
-    }
-
-    // ----------------------------------------------------------- administrator
+    // --------------------------------------------------------------------------------------------------- administrator
     public boolean isAdministrator() {
         return administrator;
     }
@@ -154,34 +138,33 @@ public class OfGroupUser extends OfMapped {
         this.administrator = administrator;
     }
 
-    public OfGroupUser administrator(final boolean administrator) {
-        setAdministrator(administrator);
-        return this;
-    }
-
-    // -------------------------------------------------------------------------
-    @NotNull
+    // -----------------------------------------------------------------------------------------------------------------
     @Id
+    @NotNull
+    @JoinColumn(name = COLUMN_NAME_GROUP_NAME, nullable = false, insertable = true, updatable = false)
+    @NamedAttribute(ATTRIBUTE_NAME_GROUP_NAME)
+    private String groupName;
+
+    @NotNull
     @ManyToOne(optional = false)
-    @JoinColumn(foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT),
-                name = COLUMN_NAME_GROUP_NAME,
-                nullable = false,
-                referencedColumnName = OfGroup.COLUMN_NAME_GROUP_NAME,
-                updatable = false)
+    @JoinColumn(name = COLUMN_NAME_GROUP_NAME, nullable = false, insertable = false, updatable = false)
     @NamedAttribute(ATTRIBUTE_NAME_GROUP)
     private OfGroup group;
 
-    @NotNull
+    // -----------------------------------------------------------------------------------------------------------------
     @Id
+    @NotNull
+    @JoinColumn(name = COLUMN_NAME_USERNAME, nullable = false, insertable = true, updatable = false)
+    @NamedAttribute(ATTRIBUTE_NAME_USERNAME)
+    private String username;
+
+    @NotNull
     @ManyToOne(optional = false)
-    @JoinColumn(foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT),
-                name = COLUMN_NAME_USERNAME,
-                nullable = false,
-                referencedColumnName = OfUser.COLUMN_NAME_USERNAME,
-                updatable = false)
+    @JoinColumn(name = COLUMN_NAME_USERNAME, nullable = false, insertable = false, updatable = false)
     @NamedAttribute(ATTRIBUTE_NAME_USER)
     private OfUser user;
 
+    // -----------------------------------------------------------------------------------------------------------------
     @Id
     @Column(name = COLUMN_NAME_ADMINISTRATOR, nullable = false)
     @NamedAttribute(ATTRIBUTE_NAME_ADMINISTRATOR)

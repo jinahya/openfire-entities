@@ -15,63 +15,65 @@
  */
 package com.github.jinahya.openfire.persistence;
 
-import static com.github.jinahya.openfire.persistence.Utilities.copyOf;
-import java.io.Serializable;
-import java.util.Date;
-import java.util.Objects;
-import static java.util.Optional.ofNullable;
 import javax.persistence.Column;
-import javax.persistence.ConstraintMode;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
+import java.time.LocalDateTime;
+import java.util.Objects;
+
+import static java.util.Optional.ofNullable;
 
 /**
  * An entity class for {@value #TABLE_NAME} table.
  *
  * @author Jin Kwon &lt;onacit at gmail.com&gt;
  */
-@IdClass(OfOfflineId.class)
 @Entity
-public class OfOffline implements Serializable {
+@IdClass(OfOfflineId.class)
+@Table(name = OfOffline.TABLE_NAME)
+public class OfOffline extends OfMapped {
 
     private static final long serialVersionUID = -7158107658001768204L;
 
-    // -------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
     public static final String TABLE_NAME = "ofOffline";
 
-    // -------------------------------------------------------------------------
-    public static final String COLUMN_NAME_USERNAME
-            = OfUser.COLUMN_NAME_USERNAME;
+    // -----------------------------------------------------------------------------------------------------------------
+    public static final String COLUMN_NAME_USERNAME = OfUser.COLUMN_NAME_USERNAME;
 
-    public static final String ATRRIBUTE_NAME_USER = "user";
+    public static final String ATTRIBUTE_NAME_USERNAME = "username";
 
-    // -------------------------------------------------------------------------
+    public static final String ATTRIBUTE_NAME_USER = "user";
+
+    // -----------------------------------------------------------------------------------------------------------------
     public static final String COLUMN_NAME_MESSAGE_ID = "messageID";
 
     public static final String ATTRIBUTE_NAME_MESSAGE_ID = "messageId";
 
-    // -------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
     public static final String COLUMN_NAME_CREATION_DATE = "creationDate";
 
     public static final String ATTRIBUTE_NAME_CREATION_DATE = "creationDate";
 
-    // -------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
     public static final String COLUMN_NAME_MESSAGE_SIZE = "messageSize";
 
     public static final String ATTRIBUTE_NAME_MESSAGE_SIZE = "messageSize";
 
-    // -------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
     public static final String COLUMN_NAME_STANZA = "stanza";
 
     public static final String ATTRIBUTE_NAME_STANZA = "stanza";
 
-    // -------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+
     /**
      * Creates a new instance.
      */
@@ -79,110 +81,82 @@ public class OfOffline implements Serializable {
         super();
     }
 
-    // -------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
     @Override
     public String toString() {
-        return super.toString() + "{"
+        return super.toString() + '{'
                + "user=" + user
                + ",messageId=" + messageId
                + ",creationDate=" + creationDate
                + ",messageSize=" + messageSize
                + ",stanza=" + stanza
-               + "}";
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + Objects.hashCode(user);
-        hash = 67 * hash + Objects.hashCode(messageId);
-        return hash;
+               + '}';
     }
 
     @Override
     public boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final OfOffline other = (OfOffline) obj;
-        if (!Objects.equals(user, other.user)) {
-            return false;
-        }
-        if (!Objects.equals(messageId, other.messageId)) {
-            return false;
-        }
-        return true;
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        final OfOffline that = (OfOffline) obj;
+        return messageSize == that.messageSize
+               && Objects.equals(user, that.user)
+               && Objects.equals(messageId, that.messageId)
+               && Objects.equals(creationDate, that.creationDate)
+               && Objects.equals(stanza, that.stanza)
+                ;
     }
 
-    // -------------------------------------------------------------- idInstance
-    public OfOfflineId getIdIsnstance() {
-        return new OfOfflineId()
-                .user(getUserUsername())
-                .messageId(getMessageId());
+    @Override
+    public int hashCode() {
+        return Objects.hash(user, messageId, creationDate, messageSize, stanza);
     }
 
-    // -------------------------------------------------------------------- user
+    // ------------------------------------------------------------------------------------------------- username / user
+    String getUsername() {
+        return username;
+    }
+
+    void setUsername(final String username) {
+        this.username = username;
+    }
+
     public OfUser getUser() {
         return user;
     }
 
     public void setUser(final OfUser user) {
         this.user = user;
+        setUsername(ofNullable(this.user).map(OfUser::getUsername).orElse(null));
     }
 
-    public OfOffline user(final OfUser user) {
-        setUser(user);
-        return this;
-    }
-
-    public String getUserUsername() {
-        return ofNullable(getUser()).map(OfUser::getUsername).orElse(null);
-    }
-
-    // --------------------------------------------------------------- messageId
+    // ------------------------------------------------------------------------------------------------------- messageId
     public Long getMessageId() {
         return messageId;
     }
 
-    public void setMessageId(Long messageId) {
+    public void setMessageId(final Long messageId) {
         this.messageId = messageId;
     }
 
-    // ------------------------------------------------------------ creationDate
-    public Date getCreationDate() {
-        return copyOf(creationDate);
+    // ---------------------------------------------------------------------------------------------------- creationDate
+    public LocalDateTime getCreationDate() {
+        return creationDate;
     }
 
-    public void setCreationDate(final Date creationDate) {
-        this.creationDate = copyOf(creationDate);
+    public void setCreationDate(final LocalDateTime creationDate) {
+        this.creationDate = creationDate;
     }
 
-    public OfOffline creationDate(final Date creationDate) {
-        setCreationDate(creationDate);
-        return this;
-    }
-
-    // ------------------------------------------------------------- messageSize
+    // ----------------------------------------------------------------------------------------------------- messageSize
     public int getMessageSize() {
         return messageSize;
     }
 
-    public void setMessageSize(int messageSize) {
+    public void setMessageSize(final int messageSize) {
         this.messageSize = messageSize;
     }
 
-    public OfOffline messageSize(final int messageSize) {
-        setMessageSize(messageSize);
-        return this;
-    }
-
-    // ------------------------------------------------------------------ stanza
+    // ---------------------------------------------------------------------------------------------------------- stanza
     public String getStanza() {
         return stanza;
     }
@@ -191,37 +165,38 @@ public class OfOffline implements Serializable {
         this.stanza = stanza;
     }
 
-    public OfOffline stanza(final String stanza) {
-        setStanza(stanza);
-        return this;
-    }
-
-    // -------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
     @NotNull
     @Id
+    @Column(name = COLUMN_NAME_USERNAME, nullable = false, insertable = true, updatable = false)
+    @NamedAttribute(ATTRIBUTE_NAME_USERNAME)
+    private String username;
+
+    @NotNull
     @ManyToOne(optional = false)
-    @JoinColumn(foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT),
-                name = COLUMN_NAME_USERNAME,
-                nullable = false,
-                referencedColumnName = OfUser.COLUMN_NAME_USERNAME,
-                updatable = false)
+    @JoinColumn(name = COLUMN_NAME_USERNAME, nullable = false, insertable = false, updatable = false)
     private OfUser user;
 
+    // -----------------------------------------------------------------------------------------------------------------
     @NotNull
     @Id
-    @Column(name = COLUMN_NAME_MESSAGE_ID, nullable = false, updatable = false)
+    @Column(name = COLUMN_NAME_MESSAGE_ID, nullable = false, insertable = true, updatable = false)
+    @NamedAttribute(ATTRIBUTE_NAME_MESSAGE_ID)
     private Long messageId;
 
+    // -----------------------------------------------------------------------------------------------------------------
     @NotNull
-    //@Temporal(TemporalType.TIMESTAMP)
-    @Convert(converter = Date015AttributeConverter.class)
+    @Convert(converter = LocalDateTime015AttributeConverter.class)
     @Column(name = COLUMN_NAME_CREATION_DATE, nullable = false)
-    private Date creationDate;
+    private LocalDateTime creationDate;
 
+    @PositiveOrZero
     @Column(name = COLUMN_NAME_MESSAGE_SIZE, nullable = false)
+    @NamedAttribute(ATTRIBUTE_NAME_MESSAGE_SIZE)
     private int messageSize;
 
     @NotNull
     @Column(name = COLUMN_NAME_STANZA, nullable = false)
+    @NamedAttribute(ATTRIBUTE_NAME_STANZA)
     private String stanza;
 }

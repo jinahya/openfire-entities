@@ -30,10 +30,10 @@ public class OfUserFlagId implements Serializable {
     // -------------------------------------------------------------------------
     @Override
     public String toString() {
-        return super.toString() + "{"
+        return super.toString() + '{'
                + "user=" + user
                + ",name=" + name
-               + "}";
+               + '}';
     }
 
     @Override

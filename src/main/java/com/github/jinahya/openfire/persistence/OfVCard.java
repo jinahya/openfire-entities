@@ -15,7 +15,6 @@
  */
 package com.github.jinahya.openfire.persistence;
 
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
@@ -24,6 +23,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 /**
  * An entity class for {@value #TABLE_NAME} table.
@@ -45,6 +45,7 @@ public class OfVCard implements Serializable {
     public static final String COLUMN_NAME_VCARD = "vcard";
 
     // -------------------------------------------------------------------------
+
     /**
      * Creates a new instance.
      */

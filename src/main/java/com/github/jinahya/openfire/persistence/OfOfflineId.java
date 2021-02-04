@@ -30,10 +30,10 @@ public class OfOfflineId implements Serializable {
     // -------------------------------------------------------------------------
     @Override
     public String toString() {
-        return super.toString() + "{"
+        return super.toString() + '{'
                + "user=" + user
                + ",messageId=" + messageId
-               + "}";
+               + '}';
     }
 
     @Override

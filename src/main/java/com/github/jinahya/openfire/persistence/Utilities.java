@@ -17,6 +17,7 @@ package com.github.jinahya.openfire.persistence;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+
 import static java.util.Optional.ofNullable;
 
 /**
@@ -27,6 +28,7 @@ import static java.util.Optional.ofNullable;
 final class Utilities {
 
     // -------------------------------------------------------------------------
+
     /**
      * Returns a copy of given value.
      *
@@ -51,6 +53,7 @@ final class Utilities {
     }
 
     // -------------------------------------------------------------------------    
+
     /**
      * Creates a new instance.
      */

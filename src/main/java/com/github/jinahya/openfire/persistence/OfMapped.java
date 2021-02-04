@@ -15,8 +15,8 @@
  */
 package com.github.jinahya.openfire.persistence;
 
-import java.io.Serializable;
 import javax.persistence.MappedSuperclass;
+import java.io.Serializable;
 
 /**
  * An abstract class for all domain objects.
@@ -26,5 +26,5 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public abstract class OfMapped implements Serializable {
 
-    private static final long serialVersionUID = 5644043894030439172L;
+    private static final long serialVersionUID = -2262345160718811122L;
 }

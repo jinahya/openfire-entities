@@ -15,8 +15,6 @@
  */
 package com.github.jinahya.openfire.persistence;
 
-import java.util.Objects;
-import static java.util.Optional.ofNullable;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -24,6 +22,9 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.util.Objects;
+
+import static java.util.Optional.ofNullable;
 
 /**
  * Entity class for {@value #TABLE_NAME} table.
@@ -37,9 +38,9 @@ public class OfMucRoomProp extends OfProp<OfMucRoomProp> {
     private static final long serialVersionUID = -6469468042118345539L;
 
     // -------------------------------------------------------------------------
+
     /**
-     * The name of the target table to which this class binds. The value is
-     * {@value #TABLE_NAME}.
+     * The name of the target table to which this class binds. The value is {@value #TABLE_NAME}.
      */
     public static final String TABLE_NAME = "ofMucRoomProp";
 
@@ -50,6 +51,7 @@ public class OfMucRoomProp extends OfProp<OfMucRoomProp> {
     public static final String ATTRIBUTE_NAME_ROOM = "room";
 
     // -------------------------------------------------------------------------
+
     /**
      * Creates a new instance.
      */
@@ -60,9 +62,9 @@ public class OfMucRoomProp extends OfProp<OfMucRoomProp> {
     // -------------------------------------------------------------------------
     @Override
     public String toString() {
-        return super.toString() + "{"
+        return super.toString() + '{'
                + "room=" + room
-               + "}";
+               + '}';
     }
 
     @Override

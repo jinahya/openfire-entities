@@ -17,33 +17,31 @@ package com.github.jinahya.openfire.persistence;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
-import java.util.Date;
 
 import static java.lang.String.format;
 import static java.util.Optional.ofNullable;
 
 /**
- * An attribute converter for converting {@code Date} attributes to/from {@code %015d}-formatted milliseconds character
+ * An attribute converter for converting {@code Long} attributes to/from {@code %015d}-formatted milliseconds character
  * columns.
  *
  * @author Jin Kwon &lt;onacit at gmail.com&gt;
  */
 @Converter
-public class Date015AttributeConverter
-        implements AttributeConverter<Date, String> {
+public class Long015AttributeConverter
+        implements AttributeConverter<Long, String> {
 
-    // -------------------------------------------------------------------------
     @Override
-    public String convertToDatabaseColumn(final Date attribute) {
+    public String convertToDatabaseColumn(final Long attribute) {
         return ofNullable(attribute)
-                .map(v -> format("%1$015d", v.getTime()))
+                .map(v -> format("%1$015d", v))
                 .orElse(null);
     }
 
     @Override
-    public Date convertToEntityAttribute(final String dbData) {
+    public Long convertToEntityAttribute(final String dbData) {
         return ofNullable(dbData)
-                .map(v -> new Date(Long.parseLong(v)))
+                .map(Long::parseLong)
                 .orElse(null);
     }
 }

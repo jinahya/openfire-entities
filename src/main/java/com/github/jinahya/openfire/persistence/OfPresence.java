@@ -15,11 +15,6 @@
  */
 package com.github.jinahya.openfire.persistence;
 
-import static com.github.jinahya.openfire.persistence.Utilities.copyOf;
-import java.io.Serializable;
-import java.util.Date;
-import java.util.Objects;
-import static java.util.Optional.ofNullable;
 import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Convert;
@@ -29,6 +24,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.Objects;
+
+import static com.github.jinahya.openfire.persistence.Utilities.copyOf;
+import static java.util.Optional.ofNullable;
 
 /**
  * An entity class for {@value #TABLE_NAME} table.
@@ -61,6 +62,7 @@ public class OfPresence implements Serializable {
     public static final String ATTRIBUTE_NAME_OFFLINE_DATE = "offlineDate";
 
     // -------------------------------------------------------------------------
+
     /**
      * Creates a new instance.
      */
@@ -71,11 +73,11 @@ public class OfPresence implements Serializable {
     // -------------------------------------------------------------------------
     @Override
     public String toString() {
-        return super.toString() + "{"
+        return super.toString() + '{'
                + "user=" + user
                + ",offlinePresence=" + offlinePresence
                + ",offlineDate=" + offlineDate
-               + "}";
+               + '}';
     }
 
     @Override

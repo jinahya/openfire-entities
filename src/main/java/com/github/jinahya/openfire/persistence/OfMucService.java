@@ -15,11 +15,11 @@
  */
 package com.github.jinahya.openfire.persistence;
 
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 /**
  * An entity for {@value #TABLE_NAME} table.
@@ -32,9 +32,9 @@ public class OfMucService extends OfMapped {
     private static final long serialVersionUID = -3116060010690646853L;
 
     // -------------------------------------------------------------------------
+
     /**
-     * The name of the target table of this entity. The value is
-     * {@value #TABLE_NAME}.
+     * The name of the target table of this entity. The value is {@value #TABLE_NAME}.
      */
     public static final String TABLE_NAME = "ofMucService";
 
@@ -61,12 +61,12 @@ public class OfMucService extends OfMapped {
     // -------------------------------------------------------------------------
     @Override
     public String toString() {
-        return super.toString() + "{"
+        return super.toString() + '{'
                + "serviceId=" + serviceId
                + ",subdomain=" + subdomain
                + ",description=" + description
                + ",hidden=" + hidden
-               + "}";
+               + '}';
     }
 
     @Override

@@ -15,8 +15,6 @@
  */
 package com.github.jinahya.openfire.persistence;
 
-import java.util.Objects;
-import static java.util.Optional.ofNullable;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -24,6 +22,9 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.util.Objects;
+
+import static java.util.Optional.ofNullable;
 
 /**
  * Entity class for {@value #TABLE_NAME} table.
@@ -46,6 +47,7 @@ public class OfMucServiceProp extends OfProp<OfMucServiceProp> {
     public static final String ATTRIBUTE_NAME_SERVICE = "service";
 
     // -------------------------------------------------------------------------
+
     /**
      * Creates a new instance.
      */
@@ -56,9 +58,9 @@ public class OfMucServiceProp extends OfProp<OfMucServiceProp> {
     // -------------------------------------------------------- java.lang.Object
     @Override
     public String toString() {
-        return super.toString() + "{"
+        return super.toString() + '{'
                + "service=" + service
-               + "}";
+               + '}';
     }
 
     @Override

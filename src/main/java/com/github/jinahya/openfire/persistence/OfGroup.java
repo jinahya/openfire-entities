@@ -15,11 +15,11 @@
  */
 package com.github.jinahya.openfire.persistence;
 
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 /**
  * The entity class for {@value #TABLE_NAME} table.
@@ -29,42 +29,42 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class OfGroup extends OfMapped {
 
-    private static final long serialVersionUID = 6455075545276927084L;
+    private static final long serialVersionUID = 3560435021625260990L;
 
-    // -------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+
     /**
-     * The name of the target table of this entity. The value is
-     * {@value #TABLE_NAME}.
+     * The name of the target table of this entity. The value is {@value}.
      */
     public static final String TABLE_NAME = "ofGroup";
 
-    // -------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+
     /**
-     * The name of target column to which {@value #ATTRIBUTE_NAME_GROUP_NAME}
-     * attribute is bind. The value is {@value #COLUMN_NAME_GROUP_NAME}.
+     * The name of target column to which {@value #ATTRIBUTE_NAME_GROUP_NAME} attribute is bind. The value is {@value}.
      */
     public static final String COLUMN_NAME_GROUP_NAME = "groupName";
 
     /**
-     * The name of source attribute from which {@value #COLUMN_NAME_GROUP_NAME}
-     * column is bind. The value is {@value #ATTRIBUTE_NAME_GROUP_NAME}.
+     * The name of source attribute from which {@value #COLUMN_NAME_GROUP_NAME} column is bind. The value is {@value}.
      */
     public static final String ATTRIBUTE_NAME_GROUP_NAME = "groupName";
 
-    // -------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+
     /**
-     * The name of target column to which {@value #ATTRIBUTE_NAME_DESCRIPTION}
-     * attribute is bind. The value is {@value #COLUMN_NAME_DESCRIPTION}.
+     * The name of database column to which {@value #ATTRIBUTE_NAME_DESCRIPTION} attribute is bind. The value is
+     * {@value}.
      */
     public static final String COLUMN_NAME_DESCRIPTION = "description";
 
     /**
-     * The name of source attribute from which {@value #COLUMN_NAME_DESCRIPTION}
-     * column is bind. The value is {@value #ATTRIBUTE_NAME_DESCRIPTION}.
+     * The name of entity attribute from which {@value #COLUMN_NAME_DESCRIPTION} column is bind. The value is {@value}.
      */
     public static final String ATTRIBUTE_NAME_DESCRIPTION = "description";
 
-    // -------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+
     /**
      * Creates a new instance.
      */
@@ -72,121 +72,78 @@ public class OfGroup extends OfMapped {
         super();
     }
 
-    // -------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
     @Override
     public String toString() {
-        return super.toString() + "{"
+        return super.toString() + '{'
                + "groupName=" + groupName
                + ",description=" + description
-               + "}";
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + Objects.hashCode(groupName);
-        return hash;
+               + '}';
     }
 
     @Override
     public boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final OfGroup other = (OfGroup) obj;
-        if (!Objects.equals(groupName, other.groupName)) {
-            return false;
-        }
-        return true;
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        final OfGroup ofGroup = (OfGroup) obj;
+        return Objects.equals(groupName, ofGroup.groupName)
+               && Objects.equals(description, ofGroup.description);
     }
 
-    // --------------------------------------------------------------- groupName
+    @Override
+    public int hashCode() {
+        return Objects.hash(groupName, description);
+    }
+
+    // ------------------------------------------------------------------------------------------------------- groupName
+
     /**
-     * Returns the current value of {@value #ATTRIBUTE_NAME_GROUP_NAME}
-     * attribute.
+     * Returns current value of {@value #ATTRIBUTE_NAME_GROUP_NAME} attribute.
      *
-     * @return the current value of {@value #ATTRIBUTE_NAME_GROUP_NAME}
-     * attribute.
+     * @return current value of {@value #ATTRIBUTE_NAME_GROUP_NAME} attribute.
      */
     public String getGroupName() {
         return groupName;
     }
 
     /**
-     * Replaces the value of {@value #ATTRIBUTE_NAME_GROUP_NAME} attribute with
-     * given.
+     * Replaces current value of {@value #ATTRIBUTE_NAME_GROUP_NAME} attribute with specified value.
      *
-     * @param groupName new value for {@value #ATTRIBUTE_NAME_GROUP_NAME}
-     * attribute.
+     * @param groupName new value for {@value #ATTRIBUTE_NAME_GROUP_NAME} attribute.
      */
     public void setGroupName(final String groupName) {
         this.groupName = groupName;
     }
 
-    /**
-     * Replaces the value of {@value #ATTRIBUTE_NAME_GROUP_NAME} attribute with
-     * given and returns this instance.
-     *
-     * @param groupName new value for {@value #ATTRIBUTE_NAME_GROUP_NAME}
-     * attribute.
-     * @return this instance.
-     * @see #setGroupName(java.lang.String)
-     */
-    public OfGroup groupName(final String groupName) {
-        setGroupName(groupName);
-        return this;
-    }
+    // ----------------------------------------------------------------------------------------------------- description
 
-    // ------------------------------------------------------------- description
     /**
-     * Returns the current value of {@value #ATTRIBUTE_NAME_DESCRIPTION}
-     * attribute.
+     * Returns current value of {@value #ATTRIBUTE_NAME_DESCRIPTION} attribute.
      *
-     * @return the current value of {@value #ATTRIBUTE_NAME_DESCRIPTION}
-     * attribute.
+     * @return current value of {@value #ATTRIBUTE_NAME_DESCRIPTION} attribute.
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * Replaces the value of {@value #ATTRIBUTE_NAME_DESCRIPTION} attribute with
-     * given.
+     * Replaces current value of {@value #ATTRIBUTE_NAME_DESCRIPTION} attribute with specified value.
      *
-     * @param description new value for {@value #ATTRIBUTE_NAME_DESCRIPTION}
-     * attribute.
+     * @param description new value for {@value #ATTRIBUTE_NAME_DESCRIPTION} attribute.
      */
     public void setDescription(final String description) {
         this.description = description;
     }
 
-    /**
-     * Replaces the value of {@value #ATTRIBUTE_NAME_DESCRIPTION} attribute with
-     * given and returns this instance.
-     *
-     * @param description new value for {@value #ATTRIBUTE_NAME_DESCRIPTION}
-     * attribute.
-     * @return this instance.
-     * @see #setDescription(java.lang.String)
-     */
-    public OfGroup description(final String description) {
-        setDescription(description);
-        return this;
-    }
-
-    // -------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
     @NotNull
     @Id
     @Column(name = COLUMN_NAME_GROUP_NAME, nullable = false, unique = true)
     @NamedAttribute(ATTRIBUTE_NAME_GROUP_NAME)
     private String groupName;
 
+    @NotNull
+    @Column(name = COLUMN_NAME_DESCRIPTION, nullable = false)
     @NamedAttribute(ATTRIBUTE_NAME_DESCRIPTION)
     private String description;
 }

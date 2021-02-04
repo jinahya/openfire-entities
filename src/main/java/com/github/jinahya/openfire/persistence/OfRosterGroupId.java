@@ -30,10 +30,10 @@ public class OfRosterGroupId implements Serializable {
     // -------------------------------------------------------------------------
     @Override
     public String toString() {
-        return super.toString() + "{"
+        return super.toString() + '{'
                + "roster=" + roster
                + ",rank=" + rank
-               + "}";
+               + '}';
     }
 
     @Override

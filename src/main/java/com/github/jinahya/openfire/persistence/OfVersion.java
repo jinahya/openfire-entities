@@ -15,11 +15,11 @@
  */
 package com.github.jinahya.openfire.persistence;
 
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 /**
  * Entity class for {@value #TABLE_NAME} table.

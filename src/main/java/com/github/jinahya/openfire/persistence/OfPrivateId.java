@@ -30,11 +30,11 @@ public class OfPrivateId implements Serializable {
     // -------------------------------------------------------------------------
     @Override
     public String toString() {
-        return super.toString() + "{"
+        return super.toString() + '{'
                + "user=" + user
                + ",name=" + name
                + ",namespace=" + namespace
-               + "}";
+               + '}';
     }
 
     @Override

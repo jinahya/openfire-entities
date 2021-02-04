@@ -29,9 +29,9 @@ public class OfMucRoomPropId extends OfPropId<OfMucRoomPropId> {
     // -------------------------------------------------------------------------
     @Override
     public String toString() {
-        return super.toString() + "{"
+        return super.toString() + '{'
                + "room=" + room
-               + "}";
+               + '}';
     }
 
     @Override

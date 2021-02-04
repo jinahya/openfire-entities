@@ -29,9 +29,9 @@ public class OfMucServicePropId extends OfPropId<OfMucServicePropId> {
     // -------------------------------------------------------------------------
     @Override
     public String toString() {
-        return super.toString() + "{"
+        return super.toString() + '{'
                + "service=" + service
-               + "}";
+               + '}';
     }
 
     @Override

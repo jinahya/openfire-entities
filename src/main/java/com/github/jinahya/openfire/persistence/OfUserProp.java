@@ -15,7 +15,6 @@
  */
 package com.github.jinahya.openfire.persistence;
 
-import static java.util.Optional.ofNullable;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -23,6 +22,8 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import static java.util.Optional.ofNullable;
 
 /**
  * The entity class for {@value #TABLE_NAME} table.
@@ -36,13 +37,14 @@ public class OfUserProp extends OfProp<OfUserProp> {
     private static final long serialVersionUID = -5913174203870238072L;
 
     // -------------------------------------------------------------------------
+
     /**
-     * The name of the table to which this entity class is bound. The value is
-     * {@value #TABLE_NAME}.
+     * The name of the table to which this entity class is bound. The value is {@value #TABLE_NAME}.
      */
     public static final String TABLE_NAME = "ofUserProp";
 
     // -------------------------------------------------------------------------
+
     /**
      * The name of the column to which {@value #ATTRIBUTE_NAME_USER} is bound.
      */
@@ -50,20 +52,20 @@ public class OfUserProp extends OfProp<OfUserProp> {
             = OfUser.COLUMN_NAME_USERNAME;
 
     /**
-     * The name of the attribute from which {@value #COLUMN_NAME_USERNAME}
-     * column is bound.
+     * The name of the attribute from which {@value #COLUMN_NAME_USERNAME} column is bound.
      */
     public static final String ATTRIBUTE_NAME_USER = "user";
 
     // -------------------------------------------------------------------------
     @Override
     public String toString() {
-        return super.toString() + "{"
+        return super.toString() + '{'
                + "user=" + user
-               + "}";
+               + '}';
     }
 
     // -------------------------------------------------------------- idInstance
+
     /**
      * Return the id instance of this entity instance.
      *

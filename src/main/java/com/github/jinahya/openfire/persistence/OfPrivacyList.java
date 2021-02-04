@@ -15,8 +15,6 @@
  */
 package com.github.jinahya.openfire.persistence;
 
-import java.io.Serializable;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
@@ -26,6 +24,8 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * An entity class for {@value #TABLE_NAME} table.
@@ -63,6 +63,7 @@ public class OfPrivacyList implements Serializable {
     public static final String ATTRIBUTE_NAME_LIST = "list";
 
     // -------------------------------------------------------------------------
+
     /**
      * Creates a new instance.
      */
@@ -73,12 +74,12 @@ public class OfPrivacyList implements Serializable {
     // -------------------------------------------------------------------------
     @Override
     public String toString() {
-        return super.toString() + "{"
+        return super.toString() + '{'
                + "user=" + user
                + ",name=" + name
                + ",default=" + default__
                + ",list=" + list
-               + "}";
+               + '}';
     }
 
     @Override

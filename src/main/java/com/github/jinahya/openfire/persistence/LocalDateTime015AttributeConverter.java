@@ -17,10 +17,10 @@ package com.github.jinahya.openfire.persistence;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
+import java.time.chrono.ChronoZonedDateTime;
 
 import static java.util.Optional.ofNullable;
 
@@ -31,22 +31,26 @@ import static java.util.Optional.ofNullable;
  * @author Jin Kwon &lt;onacit at gmail.com&gt;
  */
 @Converter
-public class ZonedLocalDateTime015AttributeConverter
-        implements AttributeConverter<ZonedDateTime, String> {
+public class LocalDateTime015AttributeConverter
+        implements AttributeConverter<LocalDateTime, String> {
 
     // -------------------------------------------------------------------------
     @Override
-    public String convertToDatabaseColumn(final ZonedDateTime attribute) {
+    public String convertToDatabaseColumn(final LocalDateTime attribute) {
         return ofNullable(attribute)
-                .map()
-        return ofNullable(attribute).map(converter::convertToDatabaseColumn).map(LocalDateTime::from).orElse(null);
+                .map(a -> a.atZone(ZoneId.systemDefault()))
+                .map(ChronoZonedDateTime::toInstant)
+                .map(Date::from)
+                .map(converter::convertToDatabaseColumn)
+                .orElse(null);
     }
 
     @Override
-    public ZonedDateTime convertToEntityAttribute(final String dbData) {
+    public LocalDateTime convertToEntityAttribute(final String dbData) {
         return ofNullable(dbData)
                 .map(converter::convertToEntityAttribute)
-                .map(d -> d.toInstant().atZone(ZoneId.systemDefault())Offset.UTC).atZone(ZoneId)LocalDateTime.from()::from).orElse(null);
+                .map(d -> d.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime())
+                .orElse(null);
     }
 
     private final Date015AttributeConverter converter = new Date015AttributeConverter();

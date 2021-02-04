@@ -22,51 +22,42 @@ import java.util.Objects;
  *
  * @author Jin Kwon &lt;onacit at gmail.com&gt;
  */
-public class OfGroupPropId extends OfPropId<OfGroupPropId> {
+public class OfGroupPropId extends OfPropId {
 
-    private static final long serialVersionUID = -2588878878648387490L;
+    private static final long serialVersionUID = 3884148746670598099L;
 
-    // -------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
     @Override
     public String toString() {
-        return super.toString() + "{"
-               + "group=" + group
-               + "}";
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = super.hashCode();
-        hash = 97 * hash + Objects.hashCode(group);
-        return hash;
+        return super.toString() + '{'
+               + "group=" + groupName
+               + '}';
     }
 
     @Override
     public boolean equals(final Object obj) {
-        if (!super.equals(obj)) {
-            return false;
-        }
-        final OfGroupPropId other = (OfGroupPropId) obj;
-        if (!Objects.equals(group, other.group)) {
-            return false;
-        }
-        return true;
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        if (!super.equals(obj)) return false;
+        final OfGroupPropId that = (OfGroupPropId) obj;
+        return Objects.equals(groupName, that.groupName);
     }
 
-    // ------------------------------------------------------------------- group
-    public String getGroup() {
-        return group;
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), groupName);
     }
 
-    void setGroup(final String group) {
-        this.group = group;
+    // ----------------------------------------------------------------------------------------------------------- group
+    public String getGroupName() {
+        return groupName;
     }
 
-    OfGroupPropId group(final String group) {
-        setGroup(group);
-        return this;
+    void setGroupName(final String groupName) {
+        this.groupName = groupName;
     }
 
-    // -------------------------------------------------------------------------
-    private String group;
+    // -----------------------------------------------------------------------------------------------------------------
+    @NamedAttribute(OfGroupProp.ATTRIBUTE_NAME_GROUP_NAME)
+    private String groupName;
 }

@@ -30,10 +30,10 @@ public class OfMucMemberId implements Serializable {
     // -------------------------------------------------------------------------
     @Override
     public String toString() {
-        return super.toString() + "{"
+        return super.toString() + '{'
                + ",room=" + room
                + ",jid=" + jid
-               + "}";
+               + '}';
     }
 
     @Override
@@ -66,6 +66,7 @@ public class OfMucMemberId implements Serializable {
     }
 
     // -------------------------------------------------------------------- room
+
     /**
      * Returns the value of {@code room} attribute.
      *
@@ -85,6 +86,7 @@ public class OfMucMemberId implements Serializable {
     }
 
     // --------------------------------------------------------------------- jid
+
     /**
      * Returns the value of {@code jid} attribute.
      *
